@@ -1,20 +1,28 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2
-            class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <!-- Panggil Setiap komponen kalian disini -->
 
-
     <!-- Counting Number - Bagas -->
-    <div class="flex w-full justify-between">
-        <h3 class="">
-            Achievement <span class="">of
-                Dibuatin.com</span>
+    <div
+        class="flex w-full justify-around items-center bg-white py-8 px-14">
+        <h3 class="text-2xl text-black">
+            <span
+                class="font-medium text-gray">Achievement</span>
+            of <br>
+            Dibuatin.com
         </h3>
+        <x-counting-number number="980"
+            label="Satisfied Customers">
+        </x-counting-number>
+        <x-counting-number number="1000"
+            label="Project Completes">
+        </x-counting-number>
+        <x-counting-number number="1000"
+            label="Employees">
+        </x-counting-number>
+        <x-counting-number number="20"
+            label="Winning Awards">
+        </x-counting-number>
     </div>
 
     <!--Benefit Platform - Alstar -->
