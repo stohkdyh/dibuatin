@@ -10,6 +10,12 @@
 
 
     <!-- Counting Number - Bagas -->
+    <div class="flex w-full justify-between">
+        <h3 class="">
+            Achievement <span class="">of
+                Dibuatin.com</span>
+        </h3>
+    </div>
 
 
 </x-app-layout>

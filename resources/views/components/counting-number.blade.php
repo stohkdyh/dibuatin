@@ -38,7 +38,7 @@
                                 clearInterval
                                     (
                                         interval
-                                        );
+                                    );
                             }
                             element
                                 .textContent =
@@ -46,7 +46,7 @@
                                 '+';
                         },
                         20
-                        ); // Adjust duration here
+                    ); // Adjust duration here
             });
         });
     </script>
