@@ -25,5 +25,6 @@
         </x-counting-number>
     </div>
 
-
+    <!-- Our Expert Service - Bagas -->
+    <x-expert-service></x-expert-service>
 </x-app-layout>
