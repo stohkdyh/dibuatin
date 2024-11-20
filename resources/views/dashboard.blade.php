@@ -108,6 +108,58 @@
         </div>
     </div>
 
+    <!-- Slider main container -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Judul dan Deskripsi -->
+            <h2 class="text-2xl md:text-3xl text-gray-900 mb-1">
+                Innovative Design & Storytelling Through Visuals
+            </h2>
+            <p class="text-gray-600 mb-8">
+                Bringing your brand to life through innovative design and compelling video storytelling, tailored to captivate and connect.
+            </p>
+    
+            <section id="slider">
+                <input type="radio" name="slider" id="s1">
+                <input type="radio" name="slider" id="s2">
+                <input type="radio" name="slider" id="s3" checked>
+                <input type="radio" name="slider" id="s4">
+                <input type="radio" name="slider" id="s5">
+    
+                <!-- Slider images inside labels -->
+                <label for="s1" id="slide1">
+                    <img src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6b4e41a670c097c8fd2834579f5d5958&auto=format&fit=crop&w=633&q=80" alt="Slide 1">
+                    <div class="text-overlay">Slide 1</div>
+                </label>
+                <label for="s2" id="slide2">
+                    <img src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49899e285952107fdfd9415b8d3bf74a&auto=format&fit=crop&w=634&q=80" alt="Slide 2">
+                    <div class="text-overlay">Slide 2</div>
+                </label>
+                <label for="s3" id="slide3">
+                    <img src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-0.3.5&s=739aef35459daa8aaeaa55363d492bc1&auto=format&fit=crop&w=673&q=80" alt="Slide 3">
+                    <div class="text-overlay">Slide 3</div>
+                </label>
+                <label for="s4" id="slide4">
+                    <img src="https://images.unsplash.com/photo-1502768040783-423da5fd5fa0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c6416353c255d2746a68c8a83943bdf&auto=format&fit=crop&w=634&q=80" alt="Slide 4">
+                    <div class="text-overlay">Slide 4</div>
+                </label>
+                <label for="s5" id="slide5">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a138cf8acd85036bd292d7f10074e79&auto=format&fit=crop&w=634&q=80" alt="Slide 5">
+                    <div class="text-overlay">Slide 5</div>
+                </label>
+    
+                <!-- Indikator slide -->
+                <div class="slider-indicators">
+                    <label for="s1" class="indicator"></label>
+                    <label for="s2" class="indicator"></label>
+                    <label for="s3" class="indicator"></label>
+                    <label for="s4" class="indicator"></label>
+                    <label for="s5" class="indicator"></label>
+                </div>
+            </section>
+        </div>
+    </section>
+
     <section class="py-12 bg-gray-100">
         <div class="container mx-auto px-6 text-center">
             <!-- Judul dan Deskripsi -->
@@ -210,7 +262,7 @@
     <div class="flex w-full justify-between">
         <div class="container mx-auto py-8 text-center">
             <!-- Heading -->
-            <h2 class="text-3xl font-bold mb-4">Voices of Our Valued Customers</h2>
+            <h2 class="text-3xl mb-4">Voices of Our Valued Customers</h2>
             <p class="text-gray-600 mb-8">
                 Discover the genuine experiences of our customers as they share how our services have made a difference
                 in their journey. Real stories, real impact.
@@ -288,7 +340,7 @@
             </div>
         </div>
         <hr>
-        <div class="flex justify-end my-8 text-xs">
+        <div class="flex justify-end py-8 text-xs">
             <p class="w-full">&copy 2020 Dibuatin Inc.</p>
             <p class="text-nowrap">Privacy Policy | Terms & Conditions | Cookies</p>
         </div>
