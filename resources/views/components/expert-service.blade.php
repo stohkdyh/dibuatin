@@ -10,12 +10,13 @@
 ])
 
 <div
-    class="flex my-6 gap-6 justify-center items-center rounded-lg 
+    class="flex my-6 justify-center items-center rounded-lg shadow-lg overflow-hidden
     {{ $imagePosition === 'right' ? '' : 'flex-row-reverse' }}">
     <!-- Bagian Konten -->
-    <div class="w-1/2">
+    <div class="w-1/2 px-8 py-8 relative">
+        <span class="h-[25rem] w-[25rem] bg-[#E67E22] rounded-full inline-block absolute opacity-40 blur-2xl -top-[50%] {{ $imagePosition === 'right' ? '-left-[40%] ' : '-right-[40%] ' }} -z-10"></span>
         <h2
-            class="text-2xl font-bold mb-4 text-left">
+            class="text-3xl font-semibold mb-4 text-left">
             {{ $title ?: "Advertising Design" }}
         </h2>
         <p class="text-gray-600 mb-6 text-left">
@@ -106,7 +107,7 @@
                 </div>
             </div>
             <button
-                class="px-6 py-2 w-full bg-white border-2 border-gray rounded-lg shadow hover:bg-gray-100">
+                class="px-6 py-2 w-full bg-white border-[0.1rem] border-black rounded-lg shadow hover:bg-black hover:text-white">
                 Order
             </button>
         </div>
@@ -114,7 +115,7 @@
 
     <!-- Bagian Gambar -->
     <div class="w-1/2">
-        <img class="object-cover rounded-xl w-full h-72"
+        <img class="object-cover rounded-xl w-full"
             src={{ $image ?: "/images/bg-short-adds.jpeg"}}
             alt="Short Video Adds">
     </div>
