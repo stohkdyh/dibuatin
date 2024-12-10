@@ -1,8 +1,11 @@
 <x-app-layout>
-
+    <span class="bg-[#E67E22] w-[55rem] h-[55rem] rounded-full inline-block blur-3xl opacity-20 absolute -mt-[30rem] -ml-[30rem] -z-10"></span>
+    <span class="bg-[#3498DB] w-[15rem] h-[25rem] rounded-l-full inline-block blur-[150px] opacity-50 absolute -mt-[15rem] end-0 -z-10"></span>
+    <span class="bg-[#8E44AD] w-[25rem] h-[25rem] rounded-l-full inline-block blur-[170px] opacity-30 absolute translate-y-[70%] end-0 bottom-0 -z-10"></span>
+    <span class="bg-[#3498DB] w-[15rem] h-[15rem] rounded-full inline-block blur-[170px] opacity-30 absolute translate-y-[90%] translate-x-[-10%] bottom-0 -z-10"></span>
     <!-- Panggil Setiap komponen kalian disini -->
     <div
-        class="flex flex-col items-center justify-center gap-y-20 py-28">
+        class="flex flex-col items-center justify-center gap-y-20 py-28 relative">
         <button
             class="rounded-full px-7 py-1 border-solid border-black text-xs"
             disabled style="border-width: 0.1rem">
@@ -69,7 +72,7 @@
                         | Why Choose Us
                     </h6>
                     <h2
-                        class="text-4xl font-thin text-gray-900 mb-9">
+                        class="text-4xl font-bold text-gray-900 mb-9">
                         Discover the Benefits of
                         Our Platform
                     </h2>
@@ -97,7 +100,7 @@
 
     <!--Benefit Platform - Alstar -->
     <div
-        class="flex w-full justify-between bg-gray-100">
+        class="flex w-full justify-between bg-white-100">
         <div
             class="container mx-auto py-12 px-6 md:px-24">
             <div
@@ -220,12 +223,12 @@
         </x-expert-service>
     </div>
 
-    <section class="py-12 bg-gray-100">
+    <section class="py-12 bg-white-100">
         <div
             class="container mx-auto px-6 text-center">
             <!-- Judul dan Deskripsi -->
             <h2
-                class="text-2xl md:text-3xl text-gray-900 mb-1">
+                class="text-2xl md:text-3xl text-gray-900 mb-1 font-bold">
                 Innovative Design & Storytelling
                 Through Visuals
             </h2>
@@ -295,12 +298,12 @@
         </div>
     </section>
 
-    <section class="py-12 bg-gray-100">
+    <section class="py-12 bg-white-100">
         <div
             class="container mx-auto px-6 text-center">
             <!-- Judul dan Deskripsi -->
             <h2
-                class="text-2xl md:text-3xl text-gray-900 mb-1">
+                class="text-2xl md:text-3xl text-gray-900 mb-1 font-bold">
                 Our Proven Workflow for
                 Outstanding Results
             </h2>
@@ -319,7 +322,7 @@
                 </div>
                 <!-- Langkah 1 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <!-- Lingkaran Putih -->
@@ -342,7 +345,7 @@
 
                 <!-- Langkah 2 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <div
@@ -363,7 +366,7 @@
 
                 <!-- Langkah 3 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <div
@@ -384,7 +387,7 @@
 
                 <!-- Langkah 4 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <div
@@ -405,7 +408,7 @@
 
                 <!-- Langkah 5 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <div
@@ -426,7 +429,7 @@
 
                 <!-- Langkah 6 -->
                 <div
-                    class="relative flex flex-col items-center bg-gray-100 z-10">
+                    class="relative flex flex-col items-center bg-white-100 z-10">
                     <div
                         class="relative w-20 h-20">
                         <div
