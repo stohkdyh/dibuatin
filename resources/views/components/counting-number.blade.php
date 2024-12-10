@@ -1,7 +1,7 @@
 <div>
     <div
         class="counting-number flex flex-col items-center gap-1">
-        <h3 class="text-5xl font-bold">
+        <h3 class="text-4xl font-bold">
             {{ $number }}<span>+</span></h3>
         <p class="text-gray text-sm">{{ $label }}
         </p>
