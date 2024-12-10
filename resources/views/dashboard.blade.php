@@ -6,8 +6,9 @@
         <button
             class="rounded-full px-7 py-1 border-solid border-black text-xs"
             disabled style="border-width: 0.1rem">
-            Welcome, <span
-                class="font-bold">{{ Auth::user()->name }}</span>
+            Welcome, <span class="font-bold">
+                {{ Auth::check() ? Auth::user()->name : 'Guest' }}
+            </span>
         </button>
         <div
             class="flex flex-col items-center justify-center gap-y-5">
