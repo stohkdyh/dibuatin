@@ -1,3 +1,118 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+[type=radio] {
+    display: none;
+}
+
+#slider {
+    width: 900px; /* Lebar slider lebih kecil */
+    height: 500px; /* Menyesuaikan tinggi slider dengan lebar */
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    margin: 0 auto; /* Center slider */
+}
+
+#slider label {
+    margin: auto;
+    width: 100%; /* Lebar label mengikuti ukuran slider */
+    height: 100%; /* Tinggi label mengikuti ukuran slider */
+    border-radius: 2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    overflow: hidden;
+}
+
+#slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#slider label:hover .text-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5); /* Hitam transparan untuk meningkatkan kontras */
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+#s5:checked ~ #slide3 {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+    transform: translate3d(-30%,0,-200px);
+}
+
+#s1:checked ~ #slide5, #s2:checked ~ #slide1,
+#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+#s5:checked ~ #slide4 {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+    transform: translate3d(-15%,0,-100px);
+}
+
+#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+#s5:checked ~ #slide5 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(0,0,0);
+}
+
+#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+#s5:checked ~ #slide1 {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+    transform: translate3d(15%,0,-100px);
+}
+
+#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+#s3:checked ~ #slide5, #s4:checked ~ #slide1,
+#s5:checked ~ #slide2 {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+    transform: translate3d(30%,0,-200px);
+}
+
+/* Styling untuk indikator */
+.slider-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#s1:checked ~ .slider-indicators label:nth-child(1),
+#s2:checked ~ .slider-indicators label:nth-child(2),
+#s3:checked ~ .slider-indicators label:nth-child(3),
+#s4:checked ~ .slider-indicators label:nth-child(4),
+#s5:checked ~ .slider-indicators label:nth-child(5) {
+    background-color: #f39c12; /* Warna indikator aktif */
+}
+
