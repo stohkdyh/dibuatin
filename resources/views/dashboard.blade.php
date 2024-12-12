@@ -8,14 +8,14 @@
     <span
         class="bg-[#3498DB] w-[15rem] h-[15rem] rounded-full inline-block blur-[170px] opacity-30 absolute translate-y-[90%] translate-x-[-10%] bottom-0 -z-10"></span>
     <!-- Panggil Setiap komponen kalian disini -->
-    <div class="flex flex-col items-center justify-center gap-y-20 py-28 relative">
+    <div class="flex flex-col items-center justify-center gap-y-20 py-28 mt-16 relative">
         <button class="rounded-full px-7 py-1 border-solid border-black text-xs" disabled style="border-width: 0.1rem">
             Welcome, <span class="font-bold">
                 {{ Auth::check() ? Auth::user()->name : 'Guest' }}
             </span>
         </button>
         <div class="flex flex-col items-center justify-center gap-y-5">
-            <p class="text-7xl">A Digital Agency &
+            <p class="text-[5rem]">A Digital Agency &
                 Solution</p>
             <p class="text-lg flex items-center mx-auto">
                 To boost your business and sales

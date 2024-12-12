@@ -10,7 +10,7 @@
 ])
 
 <div
-    class="flex my-6 justify-center items-center rounded-lg shadow-lg overflow-hidden
+    class="flex my-6 justify-center items-center rounded-lg shadow-lg overflow-hidden bg-white -z-20
     {{ $imagePosition === 'right' ? '' : 'flex-row-reverse' }}">
     <!-- Bagian Konten -->
     <div class="w-1/2 px-8 py-8 relative">

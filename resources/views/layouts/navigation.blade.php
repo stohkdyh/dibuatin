@@ -1,20 +1,10 @@
 <nav x-data="{ open: false }"
-    class="bg-white border-b border-gray-100 mb-8">
+    class="bg-transparent backdrop-blur-[0.5rem] shadow-md mb-8 fixed top-0 left-0 right-0 z-50">
     <!-- Primary Navigation Menu -->
     <div
         class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div
-                    class="shrink-0 flex items-center">
-                    <a
-                        href="{{ route('dashboard') }}">
-                        <x-application-logo
-                            class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
                 <!-- Navigation Links -->
                 <div
                     class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -23,6 +13,28 @@
                         :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link
+                        :href="route('services')"
+                        :active="request()->routeIs('services')">
+                        {{ __('Services') }}
+                    </x-nav-link>
+                    <x-nav-link
+                        :href="route('gallery')"
+                        :active="request()->routeIs('gallery')">
+                        {{ __('Gallery') }}
+                    </x-nav-link>
+                    <x-nav-link
+                        :href="route('about')"
+                        :active="request()->routeIs('about')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Logo -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center h-full">
+                    <a href="{{ route('dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    </a>
                 </div>
             </div>
 
@@ -35,7 +47,7 @@
                     width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-transparent hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>
                                 {{ Auth::user()->name }}
                             </div>
@@ -77,11 +89,11 @@
                 <div
                     class="flex items-center space-x-4">
                     <a href="{{ route('login') }}"
-                        class="text-sm text-gray-700 hover:text-gray-900 font-medium">
+                        class="text-sm text-black hover:text-gray-700 font-medium">
                         {{ __('Log In') }}
                     </a>
                     <a href="{{ route('register') }}"
-                        class="text-sm text-white bg-gray-400 hover:bg-gray-500 font-medium px-4 py-2 rounded">
+                        class="text-sm text-black  border-[0.1rem] border-black bg-transparent hover:bg-black hover:text-white font-medium px-4 py-2 rounded-full">
                         {{ __('Register') }}
                     </a>
                 </div>
