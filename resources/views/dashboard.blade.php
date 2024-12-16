@@ -9,6 +9,7 @@
         class="bg-[#3498DB] w-[15rem] h-[15rem] rounded-full inline-block blur-[170px] opacity-30 absolute translate-y-[90%] translate-x-[-10%] bottom-0 -z-10"></span>
     <!-- Panggil Setiap komponen kalian disini -->
     <div class="flex flex-col items-center justify-center gap-y-20 py-28 mt-16 relative">
+        {{ Auth::user() }}
         <button class="rounded-full px-7 py-1 border-solid border-black text-xs" disabled style="border-width: 0.1rem">
             Welcome, <span class="font-bold">
                 {{ Auth::check() ? Auth::user()->name : 'Guest' }}
