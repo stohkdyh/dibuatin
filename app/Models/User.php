@@ -14,27 +14,27 @@ class User extends Authenticatable
     protected $keyType = 'string';
     public $incrementing = false;
     protected $fillable = [
-        'username',
+        'name',
         'phone',
         'email',
         'password',
         'role',
     ];
 
-    // public static function boot()
-    // {
-    //     parent::boot();
+    public static function boot()
+    {
+        parent::boot();
 
-    //     static::creating(function ($user) {
-    //         if (empty($user->id)) {
-    //             $user->id = (string) Str::uuid();
-    //         }
+        static::creating(function ($user) {
+            if (empty($user->id)) {
+                $user->id = (string) Str::uuid();
+            }
 
-    //         if (empty($user->role)) {
-    //             $user->role = 'customer';
-    //         }
-    //     });
-    // }
+            if (empty($user->role)) {
+                $user->role = 'customer';
+            }
+        });
+    }
 
     protected $hidden = [
         'password',
