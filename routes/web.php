@@ -19,10 +19,6 @@ Route::get('/gallery', function () {
     return view('gallery');
 })->middleware(['auth', 'verified'])->name('gallery');
 
-Route::get('/about', function () {
-    return view('about');
-})->middleware(['auth', 'verified'])->name('about');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -10,11 +10,11 @@
 ])
 
 <div
-    class="flex my-6 justify-center items-center rounded-lg shadow-lg overflow-hidden bg-white -z-20
+    class="flex my-6 justify-center items-center rounded-lg shadow-lg overflow-hidden bg-white
     {{ $imagePosition === 'right' ? '' : 'flex-row-reverse' }}">
     <!-- Bagian Konten -->
     <div class="w-1/2 px-8 py-8 relative">
-        <span class="h-[25rem] w-[25rem] bg-[#E67E22] rounded-full inline-block absolute opacity-40 blur-2xl -top-[50%] {{ $imagePosition === 'right' ? '-left-[40%] ' : '-right-[40%] ' }} -z-10"></span>
+        <span class="h-[25rem] w-[25rem] bg-[#E67E22] rounded-full inline-block absolute opacity-40 blur-2xl -top-[50%] {{ $imagePosition === 'right' ? '-left-[40%] ' : '-right-[40%] ' }}"></span>
         <h2
             class="text-3xl font-semibold mb-4 text-left">
             {{ $title ?: "Advertising Design" }}

@@ -23,11 +23,6 @@
                         :active="request()->routeIs('gallery')">
                         {{ __('Gallery') }}
                     </x-nav-link>
-                    <x-nav-link
-                        :href="route('about')"
-                        :active="request()->routeIs('about')">
-                        {{ __('About') }}
-                    </x-nav-link>
                 </div>
 
                 <!-- Logo -->

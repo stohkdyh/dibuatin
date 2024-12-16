@@ -10,74 +10,71 @@
 
     <div class="flex flex-col gap-2 py-28 mt-24 px-14">
         <h2 class="text-[5rem] mb-3 leading-[1.15]">
-            Sementara iki kosongan
+            Innovative Design & Storytelling Through Visuals
         </h2>
         <p class="text-sm text-gray-600 mb-5">
-            Partner with us to access
-            expert-driven solutions designed to
-            elevate your brand, achieve your
-            goals,
-            and make a meaningful impact.
+            Bringing your brand to life through innovative design and compelling video storytelling, tailored to captivate and connect.
         </p>
         <hr class="border-2 border-orange-200 w-40">
     </div>
 
-    <footer class="mx-20 mt-40">
-        <div class="flex justify-end my-8">
-            <div class="w-full">
-                <h3 class="text-2xl font-bold">
-                    Subscribe to our newsletter
-                </h3>
-                <p class="text-lg">Find out what
-                    we do every week</p>
-            </div>
-            <input
-                class="rounded-xl w-2/5 h-10 my-2 mr-2 text-sm border-gray-200 placeholder-gray-300 border-2 bg-transparent active:border-gray-400 focus:border-gray-400 focus:outline-none"
-                placeholder="Insert your email" type="email">
-            <button class="rounded-xl h-10 my-2 px-4 text-white text-sm"
-                style="background-color: #FF7800">Subscribe</button>
+    <div class="grid grid-cols-3 gap-4 px-14">
+        <div class="bg-slate-400 col-span-2">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/spotify_ad.mp4" type="video/mp4">
+            </video>
         </div>
-        <hr>
-        <div class="flex justify-end text-gray-700 items-center my-8">
-            <div class="w-full">
-                <img src="/images/logo.png" style="margin-left: -0.8rem">
-                <p>Lorem Ipsum, 235 Simply,
-                    printing, Pin 309 309</p>
-                <p>dibuatin.gmail.com</p>
-                <p>+62 80005 54442</p>
-            </div>
-            <div class="grid grid-cols-3 mr-10 gap-28">
-                <div class="text-black text-nowrap ">
-                    <p class="text-gray-700 font-bold mb-3">
-                        Information</p>
-                    <p>Home</p>
-                    <p>About Us</p>
-                    <p>Services</p>
-                    <p>Gallery</p>
-                </div>
-                <div class="text-black text-nowrap">
-                    <p class="text-gray-700 font-bold mb-3">
-                        Services</p>
-                    <p>Short Video Ads</p>
-                    <p>Adverstising Design</p>
-                </div>
-                <div class="text-black text-nowrap ">
-                    <p class="text-gray-700 font-bold mb-3">
-                        Support</p>
-                    <p>Help Center</p>
-                    <p>FAQ</p>
-                    <p>News</p>
-                    <p>Career</p>
-                    <p>Terms of Use</p>
-                </div>
-            </div>
+        <div class="bg-slate-400 row-span-2">02</div>
+        <div class="bg-slate-400 row-span-2">03</div>
+        <div class="bg-slate-400">
+            <img class="object-cover h-full" src="https://i.pinimg.com/736x/20/db/3c/20db3c22a21d15f9385f94e7c82b3f97.jpg">
         </div>
-        <hr>
-        <div class="flex justify-end my-8 text-xs">
-            <p class="w-full">&copy 2020 Dibuatin
-                Inc.</p>
-            <p class="text-nowrap">Privacy Policy
-                | Terms & Conditions | Cookies</p>
+        <div class="bg-slate-400 row-span-2">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/videoplayback.mp4" type="video/mp4">
+            </video>
         </div>
-    </footer>
+        <div class="bg-slate-400">06</div>
+        <div class="bg-slate-400">07</div>
+        <div class="bg-slate-400">08</div>
+        <div class="bg-slate-400">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/videoads.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="bg-slate-400 col-span-2">10</div>
+    </div>
+    {{-- <div class="grid grid-cols-3 gap-4 px-14">
+        <div class="col-span-2">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/spotify_ad.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="bg-gray-500 row-span-2 h-fit items-center justify-center">
+            <img class="object-contain h-full" src="https://images.unsplash.com/photo-1516715337554-9827022cdb29?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        </div>
+        <div class="bg-gray-500 h-fit items-center justify-center">
+            <img class="object-contain h-full" src="https://i.pinimg.com/736x/2a/cc/81/2acc815a6366d3d3643c63b1767fceb9.jpg">
+        </div>
+        <div class="bg-gray-500">07</div>
+        <div class="bg-gray-500 h-fit items-center justify-center">
+            <img class="object-cover h-full" src="https://i.pinimg.com/736x/20/db/3c/20db3c22a21d15f9385f94e7c82b3f97.jpg">
+        </div>
+        <div class="row-span-2">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/videoplayback.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="bg-gray-500 h-fit items-center justify-center">
+            <img class="object-contain h-full" src="https://i.pinimg.com/736x/f5/e5/b7/f5e5b73bfbd46a2052d0ceb3ac2bfa71.jpg">
+        </div>
+        <div class="bg-gray-500">07</div>
+        <div class="bg-gray-500">08</div>
+        <div class="bg-gray-500">
+            <video class="w-full h-full" autoplay loop>
+                <source src="/videos/videoads.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="bg-gray-500 col-span-2">10</div>
+    </div> --}}
 </x-app-layout>
