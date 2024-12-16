@@ -24,25 +24,37 @@
                 <source src="/videos/spotify_ad.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="bg-slate-400 row-span-2">02</div>
-        <div class="bg-slate-400 row-span-2">03</div>
+        <div class="bg-slate-400 row-span-2">
+            <img class="object-cover h-full w-full" src="https://i.pinimg.com/736x/bd/54/47/bd5447944088f04ea9d556ae2db32b94.jpg">
+        </div>
+        <div class="bg-slate-400 row-span-2">
+            <img class="object-cover h-full w-full" src="https://i.pinimg.com/736x/a8/ff/1a/a8ff1a4f36c55f045c8642b86dbd4f09.jpg">
+        </div>
         <div class="bg-slate-400">
             <img class="object-cover h-full" src="https://i.pinimg.com/736x/20/db/3c/20db3c22a21d15f9385f94e7c82b3f97.jpg">
         </div>
         <div class="bg-slate-400 row-span-2">
-            <video class="w-full h-full" autoplay loop>
+            <video class="object-cover w-full h-full" autoplay loop>
                 <source src="/videos/videoplayback.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="bg-slate-400">06</div>
-        <div class="bg-slate-400">07</div>
-        <div class="bg-slate-400">08</div>
+                </video>
+            </div>
         <div class="bg-slate-400">
-            <video class="w-full h-full" autoplay loop>
+            <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/da/79/d9/da79d990543baa8c4c6deafe17979b14.jpg">
+        </div>
+        <div class="bg-slate-400">
+            <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/20/c4/2b/20c42bb23f4f5d827609a9096da05c3a.jpg">
+        </div>
+        <div class="bg-slate-400">
+            <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/22/bf/91/22bf9181fa1321d17fea41948256a2dc.jpg">
+        </div>
+        <div class="bg-slate-400">
+            <video class="object-cover w-full h-full" autoplay loop>
                 <source src="/videos/videoads.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="bg-slate-400 col-span-2">10</div>
+        <div class="bg-transparent col-span-2">
+            <img class="object-cover h-full" src="https://www.artonicweb.com/wp-content/uploads/2018/08/ads-logo-horizontal-1024x322.png">
+        </div>
     </div>
     {{-- <div class="grid grid-cols-3 gap-4 px-14">
         <div class="col-span-2">
