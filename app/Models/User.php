@@ -2,24 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
     protected $keyType = 'string';
     public $incrementing = false;
+
     protected $fillable = [
         'name',
         'phone',
         'email',
         'password',
         'role',
+        'is_active'
     ];
+
 
     public static function boot()
     {
@@ -54,23 +58,27 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
-    public function orders()
+    // Relasi ke orders
+    public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'user_id');
     }
 
-    public function transactions()
+    // Relasi ke transactions
+    public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class, 'user_id');
     }
 
-    public function files()
+    // Relasi ke projects sebagai worker
+    public function projects(): HasMany
     {
-        return $this->hasMany(File::class);
+        return $this->hasMany(Project::class, 'worker');
     }
 
-    public function projects()
+    // Relasi ke uploaded files
+    public function uploadedFiles(): HasMany
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(File::class, 'uploaded_by');
     }
 }

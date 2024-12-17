@@ -3,32 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['order_id', 'worker', 'review', 'status'];
 
-    protected $fillable = [
-        'order_id',
-        'admin_id',
-        'progress',
-        'status',
-    ];
-
-    public function order()
+    // Relasi ke order
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
-    public function admin()
+    // Relasi ke worker
+    public function worker(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'admin_id');
+        return $this->belongsTo(User::class, 'worker');
     }
 
-    public function files()
+    // Relasi ke files
+    public function files(): HasMany
     {
-        return $this->hasMany(File::class);
+        return $this->hasMany(File::class, 'project_id');
     }
 }

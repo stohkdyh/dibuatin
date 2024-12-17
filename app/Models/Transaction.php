@@ -3,39 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    use HasFactory, Notifiable, SoftDeletes;
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = [
-        'order_id',
-        'user_id',
-        'promo_code_id',
-        'promo_used_at',
-        'subtotal',
-        'grandtotal',
-        'payment_method',
-        'payment_status',
-        'payment_date',
-    ];
 
-    public function order()
+    protected $fillable = ['id', 'order_id', 'user_id', 'grandtotal', 'payment_method', 'payment_status', 'payment_date'];
+
+    // Relasi ke user
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function user()
+    // Relasi ke order
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function promoCode()
-    {
-        return $this->belongsTo(PromoCode::class);
+        return $this->belongsTo(Order::class, 'order_id');
     }
 }

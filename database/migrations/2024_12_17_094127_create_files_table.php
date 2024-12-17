@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('file_path');
             $table->string('file_type');
             $table->uuid('uploaded_by');
-            $table->dateTime('uploaded_at');
+            $table->timestamp('uploaded_at')->useCurrent();
             $table->softDeletes();
             $table->timestamps();
 

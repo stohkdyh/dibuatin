@@ -2,46 +2,42 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    use HasFactory, Notifiable, SoftDeletes;
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'type_id',
-        'status',
-        'value_1',
-        'value_2',
-        'dificulty_level',
-        'price',
-        'deadline',
-    ];
 
-    public function user()
+    protected $fillable = ['id', 'user_id', 'package_id', 'request', 'orientation', 'status', 'price'];
+
+    // Relasi ke user
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function transactions()
+    // Relasi ke package
+    public function package(): BelongsTo
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsTo(Package::class, 'package_id');
     }
 
-    public function typeProduct()
+    // Relasi ke project
+    public function project(): HasOne
     {
-        return $this->belongsTo(TypeProduct::class, 'type_id');
+        return $this->hasOne(Project::class, 'order_id');
     }
 
-    public function project()
+    // Relasi ke transaction
+    public function transaction(): HasOne
     {
-        return $this->hasOne(Project::class);
+        return $this->hasOne(Transaction::class, 'order_id');
     }
 }
