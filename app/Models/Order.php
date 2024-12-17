@@ -18,6 +18,9 @@ class Order extends Model
         'description',
         'type_id',
         'status',
+        'value_1',
+        'value_2',
+        'dificulty_level',
         'price',
         'deadline',
     ];
