@@ -16,8 +16,13 @@ class ProdukAtribute extends Model
         'unit',
     ];
 
-    public function productType()
+    public function typeProduct()
     {
         return $this->belongsTo(TypeProduct::class, 'product_type_id');
+    }
+
+    public function productPricings()
+    {
+        return $this->hasMany(ProductPricing::class, 'attribute_name', 'id');
     }
 }

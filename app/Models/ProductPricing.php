@@ -23,4 +23,9 @@ class ProductPricing extends Model
     {
         return $this->belongsTo(TypeProduct::class, 'product_type_id');
     }
+
+    public function attribute()
+    {
+        return $this->belongsTo(ProdukAtribute::class, 'attribute_name', 'id');
+    }
 }
