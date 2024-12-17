@@ -11,8 +11,8 @@ class CreateWorker extends CreateRecord
 {
     protected static string $resource = WorkerResource::class;
 
-    protected function afterCreate(): RedirectResponse
+    protected function getRedirectUrl(): string
     {
-        return redirect()->route('filament.resources.workers.index');
+        return $this->getResource()::getUrl('index');
     }
 }

@@ -58,27 +58,18 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
-    // Relasi ke orders
-    public function orders(): HasMany
+    public function orders()
     {
         return $this->hasMany(Order::class, 'user_id');
     }
 
-    // Relasi ke transactions
-    public function transactions(): HasMany
+    public function transactions()
     {
         return $this->hasMany(Transaction::class, 'user_id');
     }
 
-    // Relasi ke projects sebagai worker
-    public function projects(): HasMany
+    public function projects()
     {
-        return $this->hasMany(Project::class, 'worker');
-    }
-
-    // Relasi ke uploaded files
-    public function uploadedFiles(): HasMany
-    {
-        return $this->hasMany(File::class, 'uploaded_by');
+        return $this->hasMany(Project::class, 'user_id');
     }
 }

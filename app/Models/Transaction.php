@@ -14,17 +14,22 @@ class Transaction extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $fillable = ['id', 'order_id', 'user_id', 'grandtotal', 'payment_method', 'payment_status', 'payment_date'];
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'grandtotal',
+        'payment_method',
+        'payment_status',
+        'payment_date'
+    ];
 
-    // Relasi ke user
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    // Relasi ke order
-    public function order(): BelongsTo
+    public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

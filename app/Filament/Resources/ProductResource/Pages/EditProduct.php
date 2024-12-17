@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\WorkerResource\Pages;
+namespace App\Filament\Resources\ProductResource\Pages;
 
+use App\Filament\Resources\ProductResource;
 use Filament\Actions;
-use Illuminate\Http\RedirectResponse;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Resources\WorkerResource;
 
-class EditWorker extends EditRecord
+class EditProduct extends EditRecord
 {
-    protected static string $resource = WorkerResource::class;
+    protected static string $resource = ProductResource::class;
 
     protected function getHeaderActions(): array
     {

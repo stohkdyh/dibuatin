@@ -17,13 +17,11 @@ return new class extends Migration
             $table->string('file_name');
             $table->string('file_path');
             $table->string('file_type');
-            $table->uuid('uploaded_by');
-            $table->timestamp('uploaded_at')->useCurrent();
-            $table->softDeletes();
-            $table->timestamps();
-
+            $table->uuid('user_id');
+            $table->timestamp('uploaded_at');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

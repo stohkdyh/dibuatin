@@ -14,15 +14,12 @@ class BenefitPackage extends Model
      * Kolom yang dapat diisi secara massal.
      */
     protected $fillable = [
-        'package_id',
-        'benefit',
+        'packages_id',
+        'benefit'
     ];
 
-    /**
-     * Relasi ke model Package.
-     */
     public function package()
     {
-        return $this->belongsTo(Package::class);
+        return $this->belongsTo(Package::class, 'packages_id');
     }
 }

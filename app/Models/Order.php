@@ -15,29 +15,32 @@ class Order extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $fillable = ['id', 'user_id', 'package_id', 'request', 'orientation', 'status', 'price'];
+    protected $fillable = [
+        'user_id',
+        'package_id',
+        'request',
+        'orientation',
+        'status',
+        'price'
+    ];
 
-    // Relasi ke user
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relasi ke package
-    public function package(): BelongsTo
+    public function package()
     {
         return $this->belongsTo(Package::class, 'package_id');
     }
 
-    // Relasi ke project
-    public function project(): HasOne
-    {
-        return $this->hasOne(Project::class, 'order_id');
-    }
-
-    // Relasi ke transaction
-    public function transaction(): HasOne
+    public function transaction()
     {
         return $this->hasOne(Transaction::class, 'order_id');
+    }
+
+    public function project()
+    {
+        return $this->hasOne(Project::class, 'order_id');
     }
 }

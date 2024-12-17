@@ -62,8 +62,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make('Orders')->collapsed(),
-                NavigationGroup::make('Products')->collapsed(),
-                NavigationGroup::make('Datas')->label('User Data')->collapsed(),
+                NavigationGroup::make('Services')->collapsed(),
+                NavigationGroup::make('Datas')->collapsed(),
             ]);
     }
 }

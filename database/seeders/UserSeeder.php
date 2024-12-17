@@ -49,9 +49,10 @@ class UserSeeder extends Seeder
             'id' => Str::uuid(),
             'name' => 'Bagas',
             'phone' => '081234567893',
-            'email' => 'worker.one@example.com',
+            'email' => 'liandev@example.com',
             'password' => Hash::make('worker'), // Password untuk worker
             'role' => 'worker',
+            'is_active' => 1,
         ]);
 
         User::create([
@@ -61,6 +62,7 @@ class UserSeeder extends Seeder
             'email' => 'pogung.adit@example.com',
             'password' => Hash::make('worker'), // Password untuk worker
             'role' => 'worker',
+            'is_active' => 0,
         ]);
     }
 }

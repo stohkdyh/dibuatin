@@ -17,13 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->text('detail_package')->nullable();
             $table->integer('price');
-            $table->date('deadline');
-            $table->uuid('worker');
+            $table->dateTime('deadline');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('worker')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -11,23 +11,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Project extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['order_id', 'worker', 'review', 'status'];
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'review',
+        'status'
+    ];
 
-    // Relasi ke order
-    public function order(): BelongsTo
+    public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
 
-    // Relasi ke worker
-    public function worker(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'worker');
-    }
-
-    // Relasi ke files
-    public function files(): HasMany
-    {
-        return $this->hasMany(File::class, 'project_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

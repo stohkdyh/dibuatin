@@ -16,14 +16,13 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->unsignedBigInteger('package_id');
             $table->text('request');
-            $table->enum('orientation', ['potrait', 'landscape']);
-            $table->enum('status', ["pending", "in progress", "completed"])->default('pending');
+            $table->enum('orientation', ['portrait', 'landscape']);
+            $table->enum('status', ['pending', 'in progress', 'completed'])->default('pending');
             $table->integer('price');
-            $table->softDeletes();
-            $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

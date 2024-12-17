@@ -10,17 +10,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class File extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['project_id', 'file_name', 'file_path', 'file_type', 'uploaded_by', 'uploaded_at'];
+    protected $fillable = [
+        'project_id',
+        'file_name',
+        'file_path',
+        'file_type',
+        'user_id',
+        'uploaded_at'
+    ];
 
-    // Relasi ke project
-    public function project(): BelongsTo
+    public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    // Relasi ke uploaded_by (user)
-    public function uploader(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'uploaded_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

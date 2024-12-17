@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->uuid('order_id');
-            $table->uuid('worker');
-            $table->integer('review')->nullable()->default(0);
-            $table->enum('status', ["ongoing", "review", "completed"])->default('ongoing');
+            $table->uuid('user_id');
+            $table->integer('review')->nullable();
+            $table->enum('status', ['ongoing', 'review', 'completed'])->default('ongoing');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('worker')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

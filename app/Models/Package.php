@@ -11,28 +11,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Package extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['name', 'product_id', 'detail_package', 'price', 'deadline', 'worker'];
+    protected $fillable = [
+        'name',
+        'product_id',
+        'detail_package',
+        'price',
+        'deadline'
+    ];
 
-    // Relasi ke product
-    public function product(): BelongsTo
+    public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    // Relasi ke orders
-    public function orders(): HasMany
+    public function orders()
     {
         return $this->hasMany(Order::class, 'package_id');
-    }
-
-    // Relasi ke user (worker)
-    public function worker(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'worker');
-    }
-
-    public function benefits()
-    {
-        return $this->hasMany(BenefitPackage::class);
     }
 }

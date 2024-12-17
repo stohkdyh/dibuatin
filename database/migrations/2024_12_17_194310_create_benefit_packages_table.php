@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('benefit_packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('package_id');
+            $table->unsignedBigInteger('packages_id');
             $table->string('benefit');
-            $table->softDeletes();
-            $table->timestamps();
-
-            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('packages_id')->references('id')->on('packages')->onDelete('cascade');
         });
     }
 
