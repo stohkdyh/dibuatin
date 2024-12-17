@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,7 +10,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'], 'verified')->name('dashboard');
 
 Route::get('/services', function () {
     return view('services');
@@ -18,6 +19,11 @@ Route::get('/services', function () {
 Route::get('/gallery', function () {
     return view('gallery');
 })->middleware(['auth', 'verified'])->name('gallery');
+
+// Route::middleware(['admin.access'])->group(function () {
+//     Route::get('/admin', [::class, 'index'])->name('admin.dashboard');
+// });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
