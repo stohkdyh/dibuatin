@@ -20,7 +20,7 @@
 
     <div class="grid grid-cols-3 gap-4 px-14">
         <div class="bg-slate-400 col-span-2">
-            <video class="w-full h-full" autoplay loop>
+            <video class="w-full h-full" autoplay loop muted>
                 <source src="/videos/spotify_ad.mp4" type="video/mp4">
             </video>
         </div>
@@ -34,7 +34,7 @@
             <img class="object-cover h-full" src="https://i.pinimg.com/736x/20/db/3c/20db3c22a21d15f9385f94e7c82b3f97.jpg">
         </div>
         <div class="bg-slate-400 row-span-2">
-            <video class="object-cover w-full h-full" autoplay loop>
+            <video class="object-cover w-full h-full" autoplay loop muted>
                 <source src="/videos/videoplayback.mp4" type="video/mp4">
                 </video>
             </div>
@@ -48,7 +48,7 @@
             <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/22/bf/91/22bf9181fa1321d17fea41948256a2dc.jpg">
         </div>
         <div class="bg-slate-400">
-            <video class="object-cover w-full h-full" autoplay loop>
+            <video class="object-cover w-full h-full" autoplay loop muted>
                 <source src="/videos/videoads.mp4" type="video/mp4">
             </video>
         </div>
