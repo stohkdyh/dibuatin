@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,8 +22,27 @@ class Order extends Model
         'request',
         'orientation',
         'status',
-        'price'
+        'price',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // UUID otomatis saat record dibuat
+        static::creating(function ($order) {
+            if (empty($order->id)) {
+                $order->id = (string) Str::uuid();
+            }
+
+            if ($order->package) {
+                $order->price = $order->package->price;
+            }
+
+            // Fallback to 0 if no price
+            $order->price = $order->price ?? 0;
+        });
+    }
 
     public function user()
     {

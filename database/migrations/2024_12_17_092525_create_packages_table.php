@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->text('detail_package')->nullable();
             $table->integer('price');
-            $table->dateTime('deadline');
+            $table->integer('working_time');
+            $table->enum('unit', ['minutes', 'hours', 'days', 'months', 'years'])->default('hours');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

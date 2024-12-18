@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('packages_id');
             $table->string('benefit');
+            $table->timestamps();
             $table->foreign('packages_id')->references('id')->on('packages')->onDelete('cascade');
         });
     }

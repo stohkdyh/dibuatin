@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\PackageResource\Pages;
+namespace App\Filament\Resources\BenefitPackageResource\Pages;
 
-use App\Filament\Resources\PackageResource;
+use App\Filament\Resources\BenefitPackageResource;
+use App\Models\BenefitPackage;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPackage extends EditRecord
+class EditBenefitPackage extends EditRecord
 {
-    protected static string $resource = PackageResource::class;
+    protected static string $resource = BenefitPackageResource::class;
 
     protected function getHeaderActions(): array
     {

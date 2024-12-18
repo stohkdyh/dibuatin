@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\Product;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\BenefitPackage;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,53 +21,81 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
     protected static ?string $navigationIcon = 'heroicon-o-cube';
-
-    protected static ?string $navigationLabel = 'Packages';
-    protected static ?string $navigationGroup = 'Services';
-
+    protected static ?string $navigationLabel = 'Package';
+    protected static ?string $navigationGroup = 'Service Settings';
     protected static ?int $navigationSort = 2;
-
-    protected static ?string $breadcrumb = 'Packages';
+    protected static ?string $breadcrumb = 'Package';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Package Name')
-                    ->required()
-                    ->maxLength(255)
-                    ->placeholder('Enter package name'),
+                Forms\Components\Wizard::make()
+                    ->steps([
+                        // Step 1: Package Information
+                        Forms\Components\Wizard\Step::make('Package Information')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Package Name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('Enter package name'),
 
-                Forms\Components\Select::make('product_id')
-                    ->label('Product')
-                    ->options(Product::all()->pluck('name', 'id'))
-                    ->required()
-                    ->searchable(),
+                                Forms\Components\Select::make('product_id')
+                                    ->label('Product')
+                                    ->options(Product::all()->pluck('name', 'id'))
+                                    ->required()
+                                    ->searchable(),
 
-                Forms\Components\Textarea::make('detail_package')
-                    ->label('Package Details')
-                    ->rows(4)
-                    ->placeholder('Enter detailed description'),
+                                Forms\Components\Textarea::make('detail_package')
+                                    ->label('Package Details')
+                                    ->rows(4)
+                                    ->placeholder('Enter detailed description'),
 
-                Forms\Components\TextInput::make('price')
-                    ->label('Price')
-                    ->required()
-                    ->numeric()
-                    ->placeholder('Enter price'),
+                                Forms\Components\TextInput::make('price')
+                                    ->label('Price')
+                                    ->required()
+                                    ->numeric()
+                                    ->placeholder('Enter price'),
 
-                Forms\Components\TextInput::make('deadline')
-                    ->label('Deadline')
-                    ->required()
-                    ->numeric()
-                    ->placeholder('Enter deadline in days'),
+                                Forms\Components\TextInput::make('working_time')
+                                    ->label('Working Time')
+                                    ->required()
+                                    ->numeric()
+                                    ->placeholder('Enter working time'),
 
-                Forms\Components\Select::make('worker')
-                    ->label('Assigned Worker')
-                    ->options(User::where('role', 'worker')->pluck('name', 'id'))
-                    ->searchable()
-                    ->required(),
-            ])
-            ->columns(2);
+                                Forms\Components\Select::make('unit')
+                                    ->label('Unit')
+                                    ->options([
+                                        'minutes' => 'Minutes',
+                                        'hours' => 'Hours',
+                                        'days' => 'Days',
+                                        'months' => 'Months',
+                                        'years' => 'Years',
+                                    ])
+                                    ->default('hours')
+                                    ->required(),
+                            ])
+                            ->columns(2),
+
+                        // Step 2: Benefits
+                        Forms\Components\Wizard\Step::make('Benefits')->schema([
+                            Forms\Components\Repeater::make('benefits')
+                                ->label('Benefits')
+                                ->relationship('benefitPackages')
+                                ->schema([
+                                    Forms\Components\TextInput::make('benefit')
+                                        ->label('Benefit')
+                                        ->required()
+                                        ->placeholder('Enter benefit details')
+                                        ->hint('Provide details about the benefit.')
+                                ])
+                                ->createItemButtonLabel('Add Benefit')
+                                ->collapsible()
+                                ->required(),
+                        ]),
+                    ])
+                    ->columnSpan(2)
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -83,23 +112,18 @@ class PackageResource extends Resource
                     ->label('Product')
                     ->sortable()
                     ->searchable()
-                    ->icon('heroicon-o-box'),
+                    ->icon('heroicon-o-archive-box'),
 
                 TextColumn::make('price')
                     ->label('Price')
                     ->sortable()
                     ->formatStateUsing(fn($state) => 'IDR ' . number_format($state, 0, ',', '.')),
 
-                TextColumn::make('deadline')
-                    ->label('Deadline (days)')
+                TextColumn::make('working_time')
+                    ->label('Working Time')
                     ->sortable()
+                    ->getStateUsing(fn($record) => $record->working_time . ' ' . $record->unit)
                     ->icon('heroicon-o-clock'),
-
-                // TextColumn::make('worker.name')
-                //     ->label('Assigned Worker')
-                //     ->sortable()
-                //     ->searchable()
-                //     ->icon('heroicon-o-user'),
             ])
             ->filters([
                 //

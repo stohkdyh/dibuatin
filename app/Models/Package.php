@@ -16,13 +16,20 @@ class Package extends Model
         'product_id',
         'detail_package',
         'price',
-        'deadline'
+        'working_time',
+        'unit'
     ];
+
+    public function benefitPackages()
+    {
+        return $this->hasMany(BenefitPackage::class, 'packages_id');
+    }
 
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
 
     public function orders()
     {
