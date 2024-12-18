@@ -3,29 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class File extends Model
 {
     use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'project_id',
         'file_name',
         'file_path',
         'file_type',
-        'uploaded_by',
-        'uploaded_at',
+        'user_id',
+        'uploaded_at'
     ];
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function uploadedBy()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'uploaded_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
