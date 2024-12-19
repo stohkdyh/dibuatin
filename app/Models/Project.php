@@ -15,7 +15,7 @@ class Project extends Model
         'order_id',
         'user_id',
         'review',
-        'status'
+        'status_project'
     ];
 
     public function order()
