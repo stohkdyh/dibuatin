@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,38 @@ class Transaction extends Model
         'payment_status',
         'payment_date'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($transaction) {
+            // Pastikan user_id terisi
+            if (empty($transaction->user_id)) {
+                $order = Order::find($transaction->order_id);
+                if ($order) {
+                    $transaction->user_id = $order->user_id;
+                } else {
+                    throw new \Exception('User ID is required and could not be resolved.');
+                }
+            }
+
+            // Pastikan grandtotal terisi
+            if (empty($transaction->grandtotal)) {
+                $order = Order::find($transaction->order_id);
+                if ($order) {
+                    $transaction->grandtotal = $order->price;
+                } else {
+                    $transaction->grandtotal = 0;
+                }
+            }
+
+            // Generate UUID untuk ID jika kosong
+            if (empty($transaction->id)) {
+                $transaction->id = (string) Str::uuid();
+            }
+        });
+    }
 
     public function order()
     {
