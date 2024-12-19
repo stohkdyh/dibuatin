@@ -20,6 +20,10 @@ Route::get('/gallery', function () {
     return view('gallery');
 })->middleware(['auth', 'verified'])->name('gallery');
 
+Route::get('/order', function () {
+    return view('order');
+})->middleware(['auth', 'verified'])->name('order');
+
 // Route::middleware(['admin.access'])->group(function () {
 //     Route::get('/admin', [::class, 'index'])->name('admin.dashboard');
 // });
