@@ -125,7 +125,7 @@ class ProjectResource extends Resource
 
                         $userName = $record->order->user ? $record->order->user->name : 'Unknown User';
                         $formattedState = "{$state} ({$productName}) ({$userName})";
-                        return Str::limit($formattedState, 50, '...');
+                        return Str::limit($formattedState, 80, '...');
                     }),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Worker')

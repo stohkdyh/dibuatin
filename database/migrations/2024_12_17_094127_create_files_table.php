@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('file_path');
             $table->string('file_type');
             $table->uuid('user_id');
-            $table->timestamp('uploaded_at');
+            $table->softDeletes();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
