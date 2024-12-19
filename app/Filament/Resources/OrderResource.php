@@ -7,6 +7,7 @@ use App\Models\User;
 use Filament\Tables;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\Project;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -65,7 +66,7 @@ class OrderResource extends Resource
                             $package = Package::with('benefitPackages')->find($state);
 
                             if ($package) {
-                                $set('price', $package->price);  // Directly set the price
+                                $set('price', $package->price);
                                 $set('detail_package', $package->detail_package);
                                 $set('working_time', "{$package->working_time} {$package->unit}");
 
@@ -114,6 +115,7 @@ class OrderResource extends Resource
                             TextInput::make('price')
                                 ->label('Price')
                                 ->numeric()
+                                ->disabled()
                                 ->required()
                                 ->default(function ($get) {
                                     $packageId = $get('package_id');
@@ -140,7 +142,7 @@ class OrderResource extends Resource
                                 ->placeholder('Package details will be auto-filled'),
                         ]),
                     ])
-                    ->collapsible(),
+                    ->columns(2),
             ]);
     }
 

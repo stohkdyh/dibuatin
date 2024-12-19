@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('order_id');
             $table->uuid('user_id');
             $table->integer('review')->nullable();
-            $table->enum('status', ['ongoing', 'review', 'completed'])->default('ongoing');
+            $table->enum('status_project', ['ongoing', 'review', 'completed'])->default('ongoing');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
