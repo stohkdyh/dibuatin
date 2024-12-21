@@ -41,7 +41,7 @@ class ProjectResource extends Resource
 
                         if (!$record) {
                             return Order::with(['package.product', 'user'])
-                                ->where('status', 'completed')
+                                ->where('status', 'in progress')
                                 ->whereDoesntHave('project')
                                 ->get()
                                 ->mapWithKeys(function ($order) {
@@ -76,7 +76,7 @@ class ProjectResource extends Resource
                             });
                     })
                     ->required()
-                    ->placeholder('Select an Order'),
+                    ->placeholder('Select an Request Order'),
 
                 Select::make('user_id')
                     ->label('Worker Active')

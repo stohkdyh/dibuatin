@@ -21,7 +21,6 @@ class Transaction extends Model
         'grandtotal',
         'payment_method',
         'payment_status',
-        'payment_date'
     ];
 
     protected static function boot()

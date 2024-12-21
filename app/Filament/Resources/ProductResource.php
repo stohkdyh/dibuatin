@@ -48,13 +48,6 @@ class ProductResource extends Resource
                     ->searchable()
                     ->icon('heroicon-o-cube')
                     ->tooltip('Click to edit product details'),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created At')
-                    ->sortable()
-                    ->date('F j, Y')
-                    ->icon('heroicon-o-calendar')
-                    ->tooltip('Date when the product was created'),
             ])
             ->filters([
                 //

@@ -15,6 +15,9 @@ use App\Filament\Resources\WorkerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\WorkerResource\RelationManagers;
 
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
+
 class WorkerResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -47,17 +50,32 @@ class WorkerResource extends Resource
                     ->required()
                     ->maxLength(15),
 
-                Forms\Components\Select::make('role')
-                    ->label('Role')
-                    ->options([
-                        'worker' => 'Worker',
-                        'customer' => 'Customer',
-                        'admin' => 'Admin',
-                    ])
-                    ->default('worker'),
+                Forms\Components\TextInput::make('password')
+                    ->label('Password')
+                    ->password()
+                    ->required(fn($livewire) => $livewire instanceof Pages\CreateWorker)
+                    ->hidden(fn($livewire) => $livewire instanceof Pages\EditWorker),
 
-                Forms\Components\Toggle::make('is_active')
-                    ->required(),
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\Select::make('role')
+                        ->label('Role')
+                        ->options([
+                            'worker' => 'Worker',
+                            'customer' => 'Customer',
+                            'admin' => 'Admin',
+                        ])
+                        ->default('worker')
+                        ->inlineLabel(true)
+                        ->columnSpan(2),
+
+                    Forms\Components\Toggle::make('is_active')
+                        ->columnSpan(2)
+                        ->inlineLabel(true)
+                        ->required(fn($livewire) => $livewire instanceof Pages\EditWorker)
+                        ->hidden(fn($livewire) => $livewire instanceof Pages\CreateWorker),
+                ])
+                    ->columns(2)
+                    ->extraAttributes(['class' => 'flex flex-rows items-center']),
             ])
             ->columns(2);
     }
@@ -75,12 +93,13 @@ class WorkerResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Worker Name')
                     ->searchable()
                     ->sortable()
                     ->icon('heroicon-o-user-circle'),
 
                 Tables\Columns\TextColumn::make('email')
+                    ->badge()
                     ->label('Email')
                     ->searchable()
                     ->sortable()
@@ -95,12 +114,6 @@ class WorkerResource extends Resource
                     ->label('Active')
                     ->sortable()
                     ->onColor('success'),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Registered At')
-                    ->sortable()
-                    ->date('F j, Y')
-                    ->icon('heroicon-o-calendar'),
             ])
             ->filters([])
             ->actions([

@@ -14,7 +14,6 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ambil semua order yang statusnya 'completed'
         $orders = DB::table('orders')
             ->where('status', 'completed')
             ->get();
@@ -27,18 +26,32 @@ class TransactionSeeder extends Seeder
         $transactions = [];
 
         foreach ($orders as $order) {
-            $paymentDate = now()->subDays(rand(1, 30));
+            $paymentMethods = [
+                'bank_transfer',
+                'ewallet',
+                'credit_card',
+                'debit_card',
+                'virtual_account',
+                'qris',
+                'paypal'
+            ];
+            $paymentStatuses = ['paid', 'unpaid', 'refunded'];
+
+            $paymentMethod = $paymentMethods[array_rand($paymentMethods)];
+            $paymentStatus = $paymentStatuses[array_rand($paymentStatuses)];
+
+            $orderCreatedAt = \Carbon\Carbon::parse($order->created_at);
+            $createdAt = $orderCreatedAt->addDays(rand(1, 10))->addHours(rand(0, 23))->addMinutes(rand(0, 59));
 
             $transactions[] = [
                 'id' => (string) Str::uuid(),
                 'order_id' => $order->id,
                 'user_id' => $order->user_id,
                 'grandtotal' => $order->price,
-                'payment_method' => 'credit_card',
-                'payment_status' => 'unpaid',
-                'payment_date' => $paymentDate,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'payment_method' => $paymentMethod,
+                'payment_status' => $paymentStatus,
+                'created_at' => $createdAt,
+                'updated_at' => $createdAt,
             ];
         }
 

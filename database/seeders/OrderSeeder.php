@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Faker\Factory as Faker;
 
 class OrderSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         $customers = DB::table('users')->where('role', 'customer')->pluck('id')->toArray();
 
         if (count($customers) < 2) {
@@ -20,7 +23,6 @@ class OrderSeeder extends Seeder
             return;
         }
 
-        // Ambil package IDs
         $packages = DB::table('packages')->pluck('id')->toArray();
 
         if (count($packages) < 2) {
@@ -32,15 +34,16 @@ class OrderSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             $statuses = ['pending', 'in progress', 'completed'];
+            $orientations = ['portrait', 'landscape'];
 
             $orders[] = [
                 'user_id' => $customers[array_rand($customers)],
                 'package_id' => $packages[array_rand($packages)],
-                'request' => 'Request untuk pesanan ke-' . ($i + 1),
-                'orientation' => ['portrait', 'landscape'][array_rand(['portrait', 'landscape'])],
+                'request' => $faker->sentence(rand(5, 10)),
+                'orientation' => $orientations[array_rand($orientations)],
                 'status' => $statuses[array_rand($statuses)],
                 'price' => rand(50000, 200000),
-                'created_at' => now()->subDays(rand(0, 30)),
+                'created_at' => $faker->dateTimeBetween('-6 months', 'now'),
                 'updated_at' => now(),
             ];
         }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Package;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class PackageSeeder extends Seeder
 {
@@ -13,18 +14,17 @@ class PackageSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
         $packages = [];
-
-        $package_name = 'Paket ' . Str::random(5);
 
         for ($i = 1; $i <= 50; $i++) {
             $packages[] = [
-                'name' => $package_name . ' ' . $i,
+                'name' => "Paket " . $faker->unique()->word(),
                 'product_id' => rand(1, 2),
-                'detail_package' => 'Detail dari Paket ' . $package_name . ' ' . $i . ', yang menawarkan keunggulan berbeda-beda.',
+                'detail_package' => $faker->sentence(10),
                 'price' => rand(30000, 150000),
                 'working_time' => rand(1, 10),
-                'unit' => ['days', 'hours'][array_rand(['days', 'hours'])],
+                'unit' => $faker->randomElement(['days', 'hours']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

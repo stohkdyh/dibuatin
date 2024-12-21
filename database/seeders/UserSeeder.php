@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -14,6 +15,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         // Buat user dengan role admin
         User::create([
             'id' => Str::uuid(),
@@ -24,13 +27,32 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::create([
+            'id' => Str::uuid(),
+            'name' => "bagas",
+            'phone' => '081232324545',
+            'email' => "human2erori@gmail.com",
+            'password' => Hash::make('customer'),
+            'role' => 'customer',
+        ]);
+
+        User::create([
+            'id' => Str::uuid(),
+            'name' => "Lian dev",
+            'phone' => '083123456788',
+            'email' => "indonesia4gaming@gmail.com",
+            'password' => Hash::make('worker'),
+            'role' => 'worker',
+            'is_active' => 1,
+        ]);
+
         // Buat 10 user dengan role customer
         for ($i = 1; $i <= 10; $i++) {
             User::create([
                 'id' => Str::uuid(),
-                'name' => "Customer $i",
-                'phone' => '081234567' . str_pad($i + 891, 3, '0', STR_PAD_LEFT),
-                'email' => "customer$i@example.com",
+                'name' => $faker->name,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),,
+                'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('customer'),
                 'role' => 'customer',
             ]);
@@ -40,9 +62,9 @@ class UserSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             User::create([
                 'id' => Str::uuid(),
-                'name' => "Worker $i",
-                'phone' => '081234567' . str_pad($i + 900, 3, '0', STR_PAD_LEFT),
-                'email' => "worker$i@example.com",
+                'name' => $faker->name,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),,
+                'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('worker'),
                 'role' => 'worker',
                 'is_active' => $i % 2 === 0 ? 1 : 0,
