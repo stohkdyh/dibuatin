@@ -41,7 +41,7 @@ class ProjectResource extends Resource
 
                         if (!$record) {
                             return Order::with(['package.product', 'user'])
-                                ->where('status', 'completed')
+                                ->where('status', 'in progress')
                                 ->whereDoesntHave('project')
                                 ->get()
                                 ->mapWithKeys(function ($order) {
@@ -76,7 +76,7 @@ class ProjectResource extends Resource
                             });
                     })
                     ->required()
-                    ->placeholder('Select an Order'),
+                    ->placeholder('Select an Request Order'),
 
                 Select::make('user_id')
                     ->label('Worker Active')
@@ -114,7 +114,7 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order.request')  // Menampilkan kolom request dari relasi Order
+                Tables\Columns\TextColumn::make('order.request')
                     ->label('Order')
                     ->sortable()
                     ->searchable()
@@ -125,8 +125,9 @@ class ProjectResource extends Resource
 
                         $userName = $record->order->user ? $record->order->user->name : 'Unknown User';
                         $formattedState = "{$state} ({$productName}) ({$userName})";
-                        return Str::limit($formattedState, 50, '...');
+                        return Str::limit($formattedState, 80, '...');
                     }),
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Worker')
                     ->sortable()
@@ -140,6 +141,12 @@ class ProjectResource extends Resource
 
                 Tables\Columns\TextColumn::make('status_project')
                     ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'ongoing',
+                        'info' => 'review',
+                        'success' => 'completed',
+                    ])
                     ->sortable()
                     ->searchable(),
             ])

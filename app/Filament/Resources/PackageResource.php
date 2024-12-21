@@ -41,7 +41,7 @@ class PackageResource extends Resource
                                     ->placeholder('Enter package name'),
 
                                 Forms\Components\Select::make('product_id')
-                                    ->label('Product')
+                                    ->label('Product Type')
                                     ->options(Product::all()->pluck('name', 'id'))
                                     ->required()
                                     ->searchable(),
@@ -89,8 +89,6 @@ class PackageResource extends Resource
                                         ->placeholder('Enter benefit details')
                                         ->hint('Provide details about the benefit.')
                                 ])
-                                ->createItemButtonLabel('Add Benefit')
-                                ->collapsible()
                                 ->required(),
                         ]),
                     ])
@@ -109,7 +107,7 @@ class PackageResource extends Resource
                     ->icon('heroicon-o-cube'),
 
                 TextColumn::make('product.name')
-                    ->label('Product')
+                    ->label('Product Type')
                     ->sortable()
                     ->searchable()
                     ->icon('heroicon-o-archive-box'),

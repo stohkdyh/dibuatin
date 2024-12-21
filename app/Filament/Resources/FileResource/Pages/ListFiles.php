@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ProjectResource\Pages;
+namespace App\Filament\Resources\FileResource\Pages;
 
-use App\Filament\Resources\ProjectResource;
+use App\Filament\Resources\FileResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListProjects extends ListRecords
+class ListFiles extends ListRecords
 {
-    protected static string $resource = ProjectResource::class;
+    protected static string $resource = FileResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -19,6 +19,6 @@ class ListProjects extends ListRecords
 
     public function getHeading(): string
     {
-        return __('Project List');
+        return __('File Management');
     }
 }

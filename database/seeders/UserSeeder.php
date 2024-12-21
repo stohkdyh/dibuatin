@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -15,54 +15,60 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         // Buat user dengan role admin
         User::create([
             'id' => Str::uuid(),
             'name' => 'Administrator',
             'phone' => '081234567890',
             'email' => 'admin@dibuatin.com',
-            'password' => Hash::make('admin'), // Password untuk admin
+            'password' => Hash::make('admin'),
             'role' => 'admin',
         ]);
 
-        // Buat 2 user dengan role customer
         User::create([
             'id' => Str::uuid(),
-            'name' => 'Alpram',
-            'phone' => '081234567891',
-            'email' => 'alpram.doe@example.com',
-            'password' => Hash::make('customer'), // Password untuk customer
+            'name' => "Customer",
+            'phone' => '081232324545',
+            'email' => "customer@gmail.com",
+            'password' => Hash::make('customer'),
             'role' => 'customer',
         ]);
 
         User::create([
             'id' => Str::uuid(),
-            'name' => 'Royyan',
-            'phone' => '081234567892',
-            'email' => 'royyan.1@example.com',
-            'password' => Hash::make('customer'), // Password untuk customer
-            'role' => 'customer',
-        ]);
-
-        // Buat 2 user dengan role worker
-        User::create([
-            'id' => Str::uuid(),
-            'name' => 'Bagas',
-            'phone' => '081234567893',
-            'email' => 'liandev@example.com',
-            'password' => Hash::make('worker'), // Password untuk worker
+            'name' => "Worker",
+            'phone' => '083123456788',
+            'email' => "worker@gmail.com",
+            'password' => Hash::make('worker'),
             'role' => 'worker',
             'is_active' => 1,
         ]);
 
-        User::create([
-            'id' => Str::uuid(),
-            'name' => 'Adit',
-            'phone' => '081234567894',
-            'email' => 'pogung.adit@example.com',
-            'password' => Hash::make('worker'), // Password untuk worker
-            'role' => 'worker',
-            'is_active' => 0,
-        ]);
+        // Buat 10 user dengan role customer
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'id' => Str::uuid(),
+                'name' => $faker->name,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('customer'),
+                'role' => 'customer',
+            ]);
+        }
+
+        // Buat 10 user dengan role worker
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'id' => Str::uuid(),
+                'name' => $faker->name,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('worker'),
+                'role' => 'worker',
+                'is_active' => $i % 2 === 0 ? 1 : 0,
+            ]);
+        }
     }
 }

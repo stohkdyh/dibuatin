@@ -41,14 +41,14 @@ class OrderResource extends Resource
             ->schema([
                 Grid::make(2)->schema([
                     Select::make('user_id')
-                        ->label('User ')
+                        ->label('Customer ')
                         ->options(User::where('role', 'customer')->pluck('name', 'id'))
                         ->required()
                         ->searchable()
                         ->placeholder('Select User'),
 
                     Select::make('package_id')
-                        ->label('Package')
+                        ->label('Package Name')
                         ->options(
                             Package::with('product', 'benefitPackages')
                                 ->get()
@@ -151,16 +151,25 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('User')
+                    ->label('Costumer')
                     ->sortable()
                     ->searchable()
                     ->icon('heroicon-o-user'),
 
                 Tables\Columns\TextColumn::make('package.name')
-                    ->label('Package')
+                    ->label('Package Name and Details')
+                    ->formatStateUsing(function ($state, $record) {
+                        $package = $record->package;
+                        if ($package) {
+                            $productName = $package->product->name ?? 'N/A'; // Mengambil nama produk
+                            return "{$state} ({$productName}) {$package->description}";
+                        }
+                        return $state;
+                    })
                     ->sortable()
                     ->searchable()
-                    ->icon('heroicon-o-cube'),
+                    ->icon('heroicon-o-cube')
+                    ->wrap(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
@@ -198,9 +207,10 @@ class OrderResource extends Resource
                     ->icon('heroicon-o-currency-dollar'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created At')
+                    ->label('Order At')
+                    ->dateTime('M d, Y h:i A')
                     ->sortable()
-                    ->dateTime('d M Y H:i'),
+                    ->alignCenter(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')

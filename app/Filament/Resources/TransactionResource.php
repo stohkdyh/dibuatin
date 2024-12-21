@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TransactionResource\Pages;
 use App\Filament\Resources\TransactionResource\RelationManagers;
+use App\Filament\Resources\TransactionResource\Widgets\WeeklyEarningsWidget;
 
 class TransactionResource extends Resource
 {
@@ -107,12 +108,6 @@ class TransactionResource extends Resource
                     ])
                     ->default('unpaid')
                     ->required(),
-
-                Forms\Components\DateTimePicker::make('payment_date')
-                    ->label('Payment Date')
-                    ->required()
-                    ->default(now())
-                    ->helperText('The date and time will be set to your current local time.'),
             ]);
     }
 
@@ -124,7 +119,7 @@ class TransactionResource extends Resource
                     ->label('Order Request')
                     ->sortable()
                     ->searchable()
-                    ->limit(50),  // Membatasi panjang teks
+                    ->limit(15),  // Membatasi panjang teks
 
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User')
@@ -169,10 +164,11 @@ class TransactionResource extends Resource
                         };
                     }),
 
-                Tables\Columns\TextColumn::make('payment_date')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label('Payment Date')
+                    ->dateTime('M d, Y h:i A')
                     ->sortable()
-                    ->dateTime(),
+                    ->alignCenter(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('payment_status')
@@ -188,13 +184,13 @@ class TransactionResource extends Resource
                     ->label('View')
                     ->icon('heroicon-o-eye'),
 
-                Tables\Actions\EditAction::make()
-                    ->icon('heroicon-o-pencil')
-                    ->label('Edit'),
+                // Tables\Actions\EditAction::make()
+                //     ->icon('heroicon-o-pencil')
+                //     ->label('Edit'),
 
-                Tables\Actions\DeleteAction::make()
-                    ->icon('heroicon-o-trash')
-                    ->label('Delete'),
+                // Tables\Actions\DeleteAction::make()
+                //     ->icon('heroicon-o-trash')
+                //     ->label('Delete'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -214,7 +210,7 @@ class TransactionResource extends Resource
     {
         return [
             'index' => Pages\ListTransactions::route('/'),
-            'create' => Pages\CreateTransaction::route('/create'),
+            // 'create' => Pages\CreateTransaction::route('/create'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
     }
