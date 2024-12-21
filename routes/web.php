@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,13 @@ Route::get('/order', function () {
     return view('order');
 })->middleware(['auth', 'verified'])->name('order');
 
+Route::get('/payment', function () {
+    return view('payment');
+})->middleware(['auth', 'verified'])->name('payment');
+
+Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+Route::get('/payment', [PaymentController::class, 'processPayment'])->name('payment');
 // Route::middleware(['admin.access'])->group(function () {
 //     Route::get('/admin', [::class, 'index'])->name('admin.dashboard');
 // });
