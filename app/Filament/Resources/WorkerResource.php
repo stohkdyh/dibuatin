@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\WorkerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\WorkerResource\RelationManagers;
+use Filament\Panel;
 
 use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
