@@ -52,6 +52,7 @@ class FileResource extends Resource
                     ->afterStateUpdated(function ($state, $set) {
                         $project = Project::with('order.package')->find($state);
                         $packageName = $project && $project->order && $project->order->package ? $project->order->package->name : '';
+
                         $set('file_path', $packageName);
 
                         if ($state) {
@@ -76,14 +77,21 @@ class FileResource extends Resource
                 Forms\Components\TextInput::make('file_path')
                     ->label('File Path')
                     ->disabled()
-                    ->required(),
+                    ->required()
+                    ->placeholder('Will be automatically filled'),
 
                 Forms\Components\Hidden::make('file_type'),
 
                 Forms\Components\Select::make('user_id')
                     ->label('Assigned Worker')
-                    ->options(User::where('role', 'worker')->where('is_active', 1)->pluck('name', 'id'))
-                    ->required(),
+                    ->options(function () {
+                        return User::where('role', 'worker')
+                            ->pluck('name', 'id');
+                    })
+                    ->disabled()
+                    ->required()
+                    ->placeholder('Will be automatically filled'),
+
             ]);
     }
 
@@ -106,6 +114,7 @@ class FileResource extends Resource
                 Tables\Columns\TextColumn::make('file_type')
                     ->label('File Type')
                     ->searchable()
+                    ->badge()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('user_id')

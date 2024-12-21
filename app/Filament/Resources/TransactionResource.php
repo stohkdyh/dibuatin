@@ -108,12 +108,6 @@ class TransactionResource extends Resource
                     ])
                     ->default('unpaid')
                     ->required(),
-
-                Forms\Components\DateTimePicker::make('payment_date')
-                    ->label('Payment Date')
-                    ->required()
-                    ->default(now())
-                    ->helperText('The date and time will be set to your current local time.'),
             ]);
     }
 
@@ -170,10 +164,11 @@ class TransactionResource extends Resource
                         };
                     }),
 
-                Tables\Columns\TextColumn::make('payment_date')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label('Payment Date')
+                    ->dateTime('M d, Y h:i A')
                     ->sortable()
-                    ->dateTime(),
+                    ->alignCenter(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('payment_status')

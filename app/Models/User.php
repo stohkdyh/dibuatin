@@ -37,6 +37,10 @@ class User extends Authenticatable
             if (empty($user->role)) {
                 $user->role = 'customer';
             }
+
+            if ($user->role == 'worker') {
+                $user->is_active = 0;
+            }
         });
     }
 

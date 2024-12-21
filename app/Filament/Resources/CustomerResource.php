@@ -79,7 +79,7 @@ class CustomerResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Customer Name')
                     ->searchable()
                     ->sortable()
                     ->icon('heroicon-o-user-circle'),
@@ -104,12 +104,6 @@ class CustomerResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                // Tables\Actions\EditAction::make()
-                //     ->icon('heroicon-o-pencil')
-                //     ->color('info'),
-                // Tables\Actions\DeleteAction::make()
-                //     ->icon('heroicon-o-trash')
-                //     ->color('danger'),
             ])
             ->bulkActions([]);
     }
