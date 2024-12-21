@@ -2,17 +2,11 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\AttributeResource;
-use App\Filament\Resources\PricingResource;
-use App\Filament\Resources\TransactionResource\Widgets\StatsOverview;
-use App\Filament\Resources\TypeProductResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -21,26 +15,23 @@ use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+class WorkerPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('admin')
-            ->path('admin')
-            ->profile()
-            ->databaseNotifications()
-            ->sidebarCollapsibleOnDesktop(true)
+            ->id('worker')
+            ->path('worker')
+            ->topNavigation()
             ->colors([
-                'primary' => Color::Indigo,
+                'primary' => Color::Green,
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
-                'info' => Color::Blue,
+                'info' => Color::Sky,
                 'warning' => Color::Yellow,
                 'success' => Color::Emerald
             ])
@@ -49,10 +40,10 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Log Out')
                     ->url(fn() => route('logout'))
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Worker/Resources'), for: 'App\\Filament\\Worker\\Resources')
+            ->discoverPages(in: app_path('Filament/Worker/Pages'), for: 'App\\Filament\\Worker\\Pages')
             ->pages([])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Worker/Widgets'), for: 'App\\Filament\\Worker\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
@@ -66,15 +57,9 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                // 'admin.access',
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->navigationGroups([
-                NavigationGroup::make('Orders')->collapsed(),
-                NavigationGroup::make('Service Settings')->collapsed(),
-                NavigationGroup::make('Datas')->collapsed(),
             ]);
     }
 }

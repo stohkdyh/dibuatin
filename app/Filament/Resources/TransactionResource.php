@@ -119,7 +119,7 @@ class TransactionResource extends Resource
                     ->label('Order Request')
                     ->sortable()
                     ->searchable()
-                    ->limit(50),  // Membatasi panjang teks
+                    ->limit(15),  // Membatasi panjang teks
 
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User')
@@ -184,13 +184,13 @@ class TransactionResource extends Resource
                     ->label('View')
                     ->icon('heroicon-o-eye'),
 
-                Tables\Actions\EditAction::make()
-                    ->icon('heroicon-o-pencil')
-                    ->label('Edit'),
+                // Tables\Actions\EditAction::make()
+                //     ->icon('heroicon-o-pencil')
+                //     ->label('Edit'),
 
-                Tables\Actions\DeleteAction::make()
-                    ->icon('heroicon-o-trash')
-                    ->label('Delete'),
+                // Tables\Actions\DeleteAction::make()
+                //     ->icon('heroicon-o-trash')
+                //     ->label('Delete'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -210,7 +210,7 @@ class TransactionResource extends Resource
     {
         return [
             'index' => Pages\ListTransactions::route('/'),
-            'create' => Pages\CreateTransaction::route('/create'),
+            // 'create' => Pages\CreateTransaction::route('/create'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
     }

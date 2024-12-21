@@ -114,7 +114,7 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order.request')  // Menampilkan kolom request dari relasi Order
+                Tables\Columns\TextColumn::make('order.request')
                     ->label('Order')
                     ->sortable()
                     ->searchable()
@@ -127,6 +127,7 @@ class ProjectResource extends Resource
                         $formattedState = "{$state} ({$productName}) ({$userName})";
                         return Str::limit($formattedState, 80, '...');
                     }),
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Worker')
                     ->sortable()
@@ -140,6 +141,12 @@ class ProjectResource extends Resource
 
                 Tables\Columns\TextColumn::make('status_project')
                     ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'ongoing',
+                        'info' => 'review',
+                        'success' => 'completed',
+                    ])
                     ->sortable()
                     ->searchable(),
             ])

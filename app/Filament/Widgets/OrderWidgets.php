@@ -41,7 +41,7 @@ class OrderWidgets extends BaseWidget
 
             Stat::make('Request Order (Pending)', $pendingRequests)
                 ->icon('heroicon-o-pencil')
-                ->description('Jumlah order yang masih menunggu proses')
+                ->description('Jumlah order yang menunggu di proses')
                 ->descriptionIcon('heroicon-o-arrow-right-circle')
                 ->color('warning'),
 

@@ -157,10 +157,19 @@ class OrderResource extends Resource
                     ->icon('heroicon-o-user'),
 
                 Tables\Columns\TextColumn::make('package.name')
-                    ->label('Package Name')
+                    ->label('Package Name and Details')
+                    ->formatStateUsing(function ($state, $record) {
+                        $package = $record->package;
+                        if ($package) {
+                            $productName = $package->product->name ?? 'N/A'; // Mengambil nama produk
+                            return "{$state} ({$productName}) {$package->description}";
+                        }
+                        return $state;
+                    })
                     ->sortable()
                     ->searchable()
-                    ->icon('heroicon-o-cube'),
+                    ->icon('heroicon-o-cube')
+                    ->wrap(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')

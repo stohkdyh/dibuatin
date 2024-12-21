@@ -1,35 +1,28 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Worker\Resources;
 
 use Filament\Forms;
 use App\Models\File;
 use App\Models\User;
 use Filament\Tables;
-use App\Models\Order;
-use App\Models\Package;
 use App\Models\Project;
 use Filament\Forms\Form;
+use App\Models\UploadFile;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Illuminate\Support\Facades\Storage;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\FileResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\FileResource\RelationManagers;
+use App\Filament\Worker\Resources\UploadFileResource\Pages;
+use App\Filament\Worker\Resources\UploadFileResource\RelationManagers;
 
-class FileResource extends Resource
+class UploadFileResource extends Resource
 {
     protected static ?string $model = File::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
-
-    protected static ?string $navigationLabel = 'Files Center';
-    protected static ?string $navigationGroup = 'Order';
-
+    protected static ?string $navigationLabel = 'Upload Files';
     protected static ?int $navigationSort = 3;
-
-    protected static ?string $breadcrumb = 'Files Center';
+    protected static ?string $breadcrumb = 'Files';
 
     public static function form(Form $form): Form
     {
@@ -132,17 +125,9 @@ class FileResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->label('View')
-                    ->icon('heroicon-o-eye'),
-
-                Tables\Actions\EditAction::make()
-                    ->icon('heroicon-o-pencil')
-                    ->label('Edit'),
-
-                Tables\Actions\DeleteAction::make()
-                    ->icon('heroicon-o-trash')
-                    ->label('Delete'),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -161,9 +146,9 @@ class FileResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFiles::route('/'),
-            'create' => Pages\CreateFile::route('/create'),
-            'edit' => Pages\EditFile::route('/{record}/edit'),
+            'index' => Pages\ListUploadFiles::route('/'),
+            'create' => Pages\CreateUploadFile::route('/create'),
+            'edit' => Pages\EditUploadFile::route('/{record}/edit'),
         ];
     }
 }

@@ -29,18 +29,18 @@ class UserSeeder extends Seeder
 
         User::create([
             'id' => Str::uuid(),
-            'name' => "bagas",
+            'name' => "Customer",
             'phone' => '081232324545',
-            'email' => "human2erori@gmail.com",
+            'email' => "customer@gmail.com",
             'password' => Hash::make('customer'),
             'role' => 'customer',
         ]);
 
         User::create([
             'id' => Str::uuid(),
-            'name' => "Lian dev",
+            'name' => "Worker",
             'phone' => '083123456788',
-            'email' => "indonesia4gaming@gmail.com",
+            'email' => "worker@gmail.com",
             'password' => Hash::make('worker'),
             'role' => 'worker',
             'is_active' => 1,
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             User::create([
                 'id' => Str::uuid(),
                 'name' => $faker->name,
-                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('customer'),
                 'role' => 'customer',
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
             User::create([
                 'id' => Str::uuid(),
                 'name' => $faker->name,
-                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),,
+                'phone' => '08' . substr($faker->unique()->numerify('##########'), 2),
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('worker'),
                 'role' => 'worker',
