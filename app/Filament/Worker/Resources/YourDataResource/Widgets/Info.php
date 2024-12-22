@@ -16,18 +16,27 @@ class Info extends BaseWidget
     {
         $userId = Auth::id();
 
-        $totalProjects = File::where('user_id', $userId)->count();
+        // Total proyek yang diselesaikan oleh user
+        $totalProjects = File::where('user_id', $userId)
+            ->whereNull('deleted_at')
+            ->count();
 
+        // Total proyek hari ini dengan status ongoing atau review
         $totalProjectsToday = Project::where('user_id', $userId)
+            ->whereNull('deleted_at')
             ->whereDate('created_at', Carbon::today())
             ->whereIn('status_project', ['ongoing', 'review'])
             ->count();
 
+        // ID pelanggan yang terkait dengan proyek
         $customerIds = Project::where('user_id', $userId)
+            ->whereNull('deleted_at')
             ->pluck('order_id')
             ->unique();
 
+        // Total pelanggan unik
         $totalCustomers = Order::whereIn('id', $customerIds)
+            ->whereNull('deleted_at')
             ->distinct('user_id')
             ->count('user_id');
 
@@ -37,7 +46,7 @@ class Info extends BaseWidget
                 ->icon('heroicon-o-briefcase')
                 ->color('success'),
 
-            Stat::make('Total projects today', $totalProjectsToday)
+            Stat::make('Total Projects Today', $totalProjectsToday)
                 ->description('Projects created today')
                 ->icon('heroicon-o-rectangle-stack')
                 ->color('warning'),

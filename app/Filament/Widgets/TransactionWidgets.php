@@ -12,18 +12,22 @@ class TransactionWidgets extends BaseWidget
     {
         $weeklyEarnings = DB::table('transactions')
             ->where('payment_status', 'paid')
+            ->whereNull('deleted_at')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->sum('grandtotal');
 
         $successfulPayments = DB::table('transactions')
             ->where('payment_status', 'paid')
+            ->whereNull('deleted_at')
             ->count();
 
         $failedPayments = DB::table('transactions')
             ->where('payment_status', 'refunded')
+            ->whereNull('deleted_at')
             ->count();
 
         $weeklyCustomers = DB::table('transactions')
+            ->whereNull('deleted_at')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->distinct('user_id')
             ->count('user_id');

@@ -9,17 +9,11 @@ class TotalOrderChart extends ChartWidget
 {
     protected static ?string $heading = 'Total Order Per Bulan';
 
-    /**
-     * Tipe chart adalah bar.
-     */
     protected function getType(): string
     {
         return 'bar';
     }
 
-    /**
-     * Ambil data untuk chart.
-     */
     protected function getData(): array
     {
         // Ambil data total order per bulan selama 6 bulan terakhir
@@ -30,7 +24,8 @@ class TotalOrderChart extends ChartWidget
             return [
                 'month' => $start->format('M Y'),
                 'orders' => DB::table('orders')
-                    ->where('status', 'completed') // Hanya menghitung order yang selesai
+                    ->where('status', 'completed')
+                    ->whereNull('deleted_at')
                     ->whereBetween('created_at', [$start, $end])
                     ->count(),
             ];

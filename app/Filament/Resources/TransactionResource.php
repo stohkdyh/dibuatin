@@ -37,7 +37,7 @@ class TransactionResource extends Resource
                     ->placeholder('Select Order')
                     ->searchable()
                     ->options(function () {
-                        return Order::where('status', 'completed')
+                        return Order::where('status', 'pending')
                             ->pluck('request', 'id');
                     })
                     ->reactive()
@@ -104,7 +104,7 @@ class TransactionResource extends Resource
                     ->options([
                         'paid' => 'Paid',
                         'unpaid' => 'Unpaid',
-                        'refunded' => 'Refunded',
+                        'refunded' => ' ',
                     ])
                     ->default('unpaid')
                     ->required(),
@@ -211,7 +211,7 @@ class TransactionResource extends Resource
         return [
             'index' => Pages\ListTransactions::route('/'),
             // 'create' => Pages\CreateTransaction::route('/create'),
-            'edit' => Pages\EditTransaction::route('/{record}/edit'),
+            // 'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
     }
 }
