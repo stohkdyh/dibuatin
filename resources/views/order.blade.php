@@ -102,12 +102,12 @@
                         <input class="peer sr-only" id="package_{{ $package->id }}" name="package_id"
                             value="{{ $package->id }}" type="radio" required />
                         <div
-                            class="flex w-72 px-4 py-5 cursor-pointer flex-col text-left rounded-xl border-2 border-gray-300 bg-gray-50 p-1 transition-transform duration-150 hover:border-blue-400 active:scale-95 peer-checked:border-blue-500 peer-checked:shadow-md peer-checked:shadow-blue-400">
+                            class="flex w-72 h-[32rem] px-4 py-5 cursor-pointer flex-col text-left rounded-xl border-2 border-gray-300 bg-gray-50 p-1 transition-transform duration-150 hover:border-blue-400 active:scale-95 peer-checked:border-blue-500 peer-checked:shadow-md peer-checked:shadow-blue-400">
                             <label class="cursor-pointer peer-checked:text-blue-500" for="package_{{ $package->id }}">
                                 <h2 class="text-xl font-medium">{{ $package->name }}</h2>
                                 <h2 class="text-orange-500 font-bold py-3 text-4xl">IDR
                                     {{ number_format($package->price, 0, ',', '.') }}</h2>
-                                <h2 class="leading-5 pb-3">{{ $package->detail_package }}</h2>
+                                <h2 class="leading-5 mb-3 line-clamp-4">{{ $package->detail_package }}</h2>
                                 @foreach ($benefits as $benefit)
                                     @if ($benefit->packages_id == $package->id)
                                         <div class="flex flex-row pb-2">
@@ -121,15 +121,15 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                <div class="text-right mt-4">
-                                    <p class="text-gray-600 -mb-1">
-                                        Working Time
-                                    </p>
-                                    <h2 class="text-gray-700 text-xl font-bold">
-                                        {{ $package->working_time }} {{ $package->unit }}
-                                    </h2>
-                                </div>
                             </label>
+                            <div class="text-right h-full flex flex-col justify-end">
+                                <p class="text-gray-600 -mb-1">
+                                    Working Time
+                                </p>
+                                <h2 class="text-gray-700 text-xl font-bold">
+                                    {{ $package->working_time }} {{ $package->unit }}
+                                </h2>
+                            </div>
                         </div>
                     </div>
                 @endforeach
