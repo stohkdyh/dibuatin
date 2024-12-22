@@ -13,23 +13,28 @@ class OrderWidgets extends BaseWidget
         // Jumlah Order dengan status 'in progress'
         $inProgressOrders = DB::table('orders')
             ->where('status', 'in progress')
+            ->whereNull('deleted_at')
             ->count();
 
         // Jumlah Order dengan status 'pending'
         $pendingRequests = DB::table('orders')
             ->where('status', 'pending')
+            ->whereNull('deleted_at')
             ->count();
 
         // Paket yang paling banyak dipesan bulan ini
         $mostOrderedPackage = DB::table('orders')
             ->select('package_id', DB::raw('COUNT(package_id) as total'))
+            ->whereNull('deleted_at')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->groupBy('package_id')
             ->orderByDesc('total')
             ->first();
 
-        $mostOrderedPackageName = $mostOrderedPackage
-            ? DB::table('packages')->where('id', $mostOrderedPackage->package_id)->value('name')
+        $mostOrderedPackageName = $mostOrderedPackage ? DB::table('packages')
+            ->where('id', $mostOrderedPackage->package_id)
+            ->whereNull('deleted_at')
+            ->value('name')
             : 'Tidak ada paket';
 
         return [
