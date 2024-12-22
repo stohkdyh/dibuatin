@@ -39,12 +39,11 @@ class ProjectResource extends Resource
                 Select::make('order_id')
                     ->label('Order')
                     ->options(function () {
-                        return Order::with(['package.product', 'user']) // Memuat relasi package, product, dan user
-                            ->whereHas('package.product') // Memastikan package dan product terkait ada
-                            ->whereHas('user') // Memastikan user terkait ada
+                        return Order::with(['package.product', 'user'])
+                            ->whereHas('package.product')
+                            ->whereHas('user')
                             ->get()
                             ->mapWithKeys(function ($order) {
-                                // Mendapatkan informasi terkait product dan user
                                 $productName = $order->package && $order->package->product
                                     ? $order->package->product->name
                                     : 'Unknown Product';
@@ -143,6 +142,7 @@ class ProjectResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([]);
