@@ -86,14 +86,6 @@
                     <option value="landscape">Landscape</option>
                 </select>
             </div>
-            {{-- <div class="">
-                <label for="references" class="block text-gray-700 text-lg font-bold mb-2">
-                    References
-                </label>
-                <input placeholder="Enter the type of reference for your Ads" type="text"
-                    class="shadow appearance-none border-2 border-gray-100 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    name="references" />
-            </div> --}}
         </div>
 
         <div class="mx-24 mt-8 text-center">
@@ -104,7 +96,7 @@
                 Pick your ideal package and let us bring your vision to life
             </p>
 
-            <div class="flex gap-2 p-2 justify-center">
+            <div class="grid grid-cols-4 md:grid-cols-3 gap-8 p-2 mx-24">
                 @foreach ($packages as $package)
                     <div>
                         <input class="peer sr-only" id="package_{{ $package->id }}" name="package_id"
@@ -115,7 +107,7 @@
                                 <h2 class="text-xl font-medium">{{ $package->name }}</h2>
                                 <h2 class="text-orange-500 font-bold py-3 text-4xl">IDR
                                     {{ number_format($package->price, 0, ',', '.') }}</h2>
-                                <h2 class="leading-5 h-[4.5rem] pb-3">{{ $package->detail_package }}</h2>
+                                <h2 class="leading-5 pb-3">{{ $package->detail_package }}</h2>
                                 @foreach ($benefits as $benefit)
                                     @if ($benefit->packages_id == $package->id)
                                         <div class="flex flex-row pb-2">
@@ -151,30 +143,4 @@
             </div>
         </div>
     </form>
-    {{-- <button id="pay-button">Bayar Sekarang</button> --}}
-
-    {{-- <script type="text/javascript" src="<https://app.sandbox.midtrans.com/snap/snap.js>"
-        data-client-key="{{ config('midtrans.client_key') }}"></script>
-    <script type="text/javascript">
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            window.snap.pay('{{ $snapToken }}', {
-                onSuccess: function(result) {
-                    alert("Pembayaran berhasil!");
-                    console.log(result);
-                },
-                onPending: function(result) {
-                    alert("Menunggu pembayaran!");
-                    console.log(result);
-                },
-                onError: function(result) {
-                    alert("Pembayaran gagal!");
-                    console.log(result);
-                },
-                onClose: function() {
-                    alert('Anda menutup pop-up tanpa menyelesaikan pembayaran');
-                }
-            });
-        });
-    </script> --}}
 </x-app-layout>

@@ -52,6 +52,7 @@ class Transaction extends Model
             if (empty($transaction->id)) {
                 $transaction->id = (string) Str::uuid();
             }
+
         });
     }
 

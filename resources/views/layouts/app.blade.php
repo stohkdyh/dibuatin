@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth overflow-x-hidden">
 
 <head>
     <meta charset="utf-8">
@@ -17,8 +17,6 @@
         rel="stylesheet">
 
     <!-- Scripts -->
-    <script type="text/javascript" src="<https://app.sandbox.midtrans.com/snap/snap.js>"
-        data-client-key="SB-Mid-client-EOBpDvilUbvsT3kN"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
@@ -30,11 +28,11 @@
         <!-- Page Heading -->
         <!-- @isset($header)
     <header class="bg-white shadow">
-                    <div
-                        class="max-w-9xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
+                            <div
+                                class="max-w-9xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                                {{ $header }}
+                            </div>
+                        </header>
 @endisset -->
 
         <!-- Page Content -->

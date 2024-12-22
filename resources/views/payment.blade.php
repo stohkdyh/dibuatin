@@ -46,85 +46,108 @@
             </div>
         </div>
     </div>
-    {{-- <form method="GET" action="{{ route('payment') }}"> --}}
-    <div class="grid grid-cols-2 gap-4 mx-24">
-        <div class="bg-white w-full p-4 rounded-md shadow-lg">
-            <div class="flex flex-row mb-4">
-                <h2 class="font-bold text-lg w-1/4">Order ID</h2>
-                <h2 class="w-full text-lg inline-block align-middle text-right">
-                    {{ session('order_id') }}
-                    {{-- {{ $order->id }} --}}
-                </h2>
+    <form action="{{ route('payment.store') }}" method="post" id="payment">
+        <div class="grid grid-cols-2 gap-8 mx-24 my-16">
+            <div class="bg-white w-full h-fit p-8 rounded-md shadow-lg">
+                <div class="flex flex-row mb-4">
+                    <h2 class="font-bold text-lg w-1/4">Order ID</h2>
+                    <h2 class="w-full text-lg inline-block align-middle text-right">
+                        {{ session('order_id') }}
+                    </h2>
+                </div>
+                <input type="text" value="{{ session('order_id') }}" name="order_id" hidden>
+                <h2 class="font-bold w-full text-2xl mb-8">Identity</h2>
+                <div class="flex flex-row py-1">
+                    <h2 class="text-gray-800">Name:</h2>
+                    <h2 class="w-full text-2xl text-right font-medium">{{ $order->user->name }}</h2>
+                </div>
+                <div class="flex flex-row py-1">
+                    <h2 class="w-full text-gray-800">Email:</h2>
+                    <h2 class="text-right text-2xl font-medium">{{ $order->user->email }}</h2>
+                </div>
+                <div class="flex flex-row py-1">
+                    <h2 class="w-full text-gray-800">No Telephone:</h2>
+                    <h2 class="text-2xl font-medium">{{ $order->user->phone }}</h2>
+                </div>
             </div>
-            <h2 class="font-bold w-full text-lg mb-2">Identity</h2>
-            <div class="flex flex-row">
-                <h2 class="text-gray-800">Name:</h2>
-                <h2 class="w-full text-lg text-right">{{ $order->user->name }}</h2>
+            <div class="row-span-4 flex w-full pr-[30%] mb-[50%] rounded-xl scale-[1.5] translate-x-1/4 translate-y-1/4"
+                id="snap-container">
             </div>
-            <div class="flex flex-row">
-                <h2 class="w-full text-gray-800">Email:</h2>
-                <h2 class="text-right text-lg">{{ $order->user->email }}</h2>
-            </div>
-            <div class="flex flex-row">
-                <h2 class="w-full text-gray-800">No Telephone:</h2>
-                <h2 class="text-lg">{{ $order->user->phone }}</h2>
+            <div class="bg-white w-full h-fit p-8 rounded-md shadow-lg">
+                <h2 class="font-bold w-full text-2xl mb-8 align-middle">Detail Project</h2>
+                <div class="flex flex-row py-1">
+                    <h2 class="text-gray-800 flex items-center">Request:</h2>
+                    <h2 class="w-full ms-20 text-justify text-lg font-medium">{{ $order->request }}</h2>
+                </div>
+                <div class="flex flex-row py-1">
+                    <h2 class="w-full text-gray-800">Orientation:</h2>
+                    <h2 class="text-right text-2xl font-medium">{{ $order->orientation }}</h2>
+                </div>
+                <div class="flex flex-row py-1">
+                    <h2 class="w-1/2 text-gray-800">Package:</h2>
+                    <h2 class="w-full text-right text-2xl font-medium">{{ $order->package->name }}</h2>
+                </div>
             </div>
         </div>
-        <div class="row-span-2 bg-slate-400" id="snap-container">
-
-        </div>
-        <div class="bg-white w-full p-4 rounded-md shadow-lg">
-            <h2 class="font-bold w-full text-lg mb-8 align-middle">Detail Project</h2>
-            <div class="flex flex-row">
-                <h2 class="text-gray-800 flex items-center">Request:</h2>
-                <h2 class="w-full ml-20 text-right">{{ $order->request }}</h2>
-            </div>
-            <div class="flex flex-row mt-6">
-                <h2 class="w-full text-gray-800">Orientation:</h2>
-                <h2 class="text-right text-lg">{{ $order->orientation }}</h2>
-            </div>
-            <div class="flex flex-row">
-                <h2 class="w-1/2 text-gray-800">Package:</h2>
-                <h2 class="w-full text-right text-lg">{{ $order->package->name }}</h2>
-            </div>
-            <h2>{{ $snapToken }}</h2>
-        </div>
-    </div>
-    {{-- <button id="pay-button">Bayar Sekarang</button> --}}
-    <button id="pay-button">Bayar Sekarang</button>
-
-    <script type="text/javascript"
-        src="<https://app.sandbox.midtrans.com/snap/snap.js>"
+    </form>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('midtrans.client_key') }}"></script>
     <script type="text/javascript">
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function () {
-            window.snap.pay('{{ $snapToken }}', {
-                onSuccess: function (result) {
-                    alert("Pembayaran berhasil!");
-                    console.log(result);
+        window.onload = function initMidtrans() {
+            window.snap.embed('{{ $snapToken }}', {
+                embedId: 'snap-container',
+                onSuccess: function(result) {
+                    storeData(result.order_id, result.payment_type, result.transaction_id, result
+                        .transaction_status);
+                    let dashboardUrl = "{{ route('dashboard') }}";
+                    window.location.href = dashboardUrl;
                 },
-                onPending: function (result) {
-                    alert("Menunggu pembayaran!");
+                onPending: function(result) {
+                    /* You may add your own implementation here */
                     console.log(result);
+                    alert("wating your payment!");
                 },
-                onError: function (result) {
-                    alert("Pembayaran gagal!");
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
                     console.log(result);
-                },
-                onClose: function () {
-                    alert('Anda menutup pop-up tanpa menyelesaikan pembayaran');
                 }
-            });
-        });
-    </script>
-    {{-- <script type="text/javascript">
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            snap.embed('${snap-token}', {
-                embedId: 'snap-container'
-            });
-        });
-    </script> --}}
 
+            });
+        }
+
+        function storeData(a, b, c, d) {
+            // Get CSRF token
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Prepare data
+            const order_id = a;
+            const payment_method = b;
+            const transaction_id = c;
+            let transaction_status = (d == 'capture' || d == 'settlement') ? 'paid' : 'unpaid';
+
+            // Send data to the backend
+            fetch('{{ route('payment.store') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        order_id: order_id,
+                        payment_method: payment_method,
+                        transaction_id: transaction_id,
+                        transaction_status: transaction_status
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Data stored successfully');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 </x-app-layout>

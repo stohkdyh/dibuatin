@@ -30,13 +30,10 @@ Route::get('/payment', function () {
     return view('payment');
 })->middleware(['auth', 'verified'])->name('payment');
 
-Route::get('/order', [OrderController::class, 'show'])->name('order.show');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+Route::get('/order', [OrderController::class, 'show'])->name('order.show');
 Route::get('/payment', [PaymentController::class, 'processPayment'])->name('payment');
-// Route::middleware(['admin.access'])->group(function () {
-//     Route::get('/admin', [::class, 'index'])->name('admin.dashboard');
-// });
-
+Route::post('/payment-store', [PaymentController::class, 'store'])->name('payment.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
