@@ -34,7 +34,6 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->profile()
-            ->databaseNotifications()
             ->sidebarCollapsibleOnDesktop(true)
             ->colors([
                 'primary' => Color::Indigo,

@@ -18,6 +18,25 @@ class Project extends Model
         'status_project'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($project) {
+            if ($project->isDirty('status_project')) {
+                $newStatus = $project->status_project;
+                $order = $project->order;
+                if ($order) {
+                    if ($newStatus === 'completed') {
+                        $order->update(['status' => "completed"]);
+                    } elseif (in_array($newStatus, ['review', 'ongoing'])) {
+                        $order->update(['status' => 'in progress']);
+                    }
+                }
+            }
+        });
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');

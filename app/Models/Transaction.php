@@ -28,7 +28,6 @@ class Transaction extends Model
         parent::boot();
 
         static::creating(function ($transaction) {
-            // Pastikan user_id terisi
             if (empty($transaction->user_id)) {
                 $order = Order::find($transaction->order_id);
                 if ($order) {
@@ -38,7 +37,6 @@ class Transaction extends Model
                 }
             }
 
-            // Pastikan grandtotal terisi
             if (empty($transaction->grandtotal)) {
                 $order = Order::find($transaction->order_id);
                 if ($order) {
@@ -48,11 +46,18 @@ class Transaction extends Model
                 }
             }
 
-            // Generate UUID untuk ID jika kosong
             if (empty($transaction->id)) {
                 $transaction->id = (string) Str::uuid();
             }
+        });
 
+        static::saved(function ($transaction) {
+            if ($transaction->payment_status === 'paid') {
+                $order = Order::find($transaction->order_id);
+                if ($order) {
+                    $order->update(['status' => 'in progress']);
+                }
+            }
         });
     }
 

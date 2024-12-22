@@ -10,23 +10,24 @@ class TransactionWidgets extends BaseWidget
 {
     protected function getStats(): array
     {
-        // Total Pendapatan per Minggu (status 'paid')
         $weeklyEarnings = DB::table('transactions')
             ->where('payment_status', 'paid')
+            ->whereNull('deleted_at')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->sum('grandtotal');
 
-        // Total Pembayaran Sukses dan Gagal
         $successfulPayments = DB::table('transactions')
             ->where('payment_status', 'paid')
+            ->whereNull('deleted_at')
             ->count();
 
         $failedPayments = DB::table('transactions')
             ->where('payment_status', 'refunded')
+            ->whereNull('deleted_at')
             ->count();
 
-        // Total Customer per Minggu (user_id unik)
         $weeklyCustomers = DB::table('transactions')
+            ->whereNull('deleted_at')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->distinct('user_id')
             ->count('user_id');
@@ -34,7 +35,7 @@ class TransactionWidgets extends BaseWidget
         return [
             Stat::make('Total Pendapatan (Bulan Ini)', 'IDR ' . number_format($weeklyEarnings, 0, ',', '.'))
                 ->icon('heroicon-o-currency-dollar')
-                ->description('Pendapatan selama 7 hari terakhir')
+                ->description('Pendapatan (Bulain Ini)')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
                 ->color('success'),
 
