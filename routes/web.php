@@ -17,11 +17,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/services', function () {
     return view('services');
-})->middleware(['auth', 'verified'])->name('services');
+})->name('services');
 
 Route::get('/gallery', function () {
     return view('gallery');
-})->middleware(['auth', 'verified'])->name('gallery');
+})->name('gallery');
 
 Route::get('/order', function () {
     return view('order');
@@ -31,12 +31,12 @@ Route::get('/payment', function () {
     return view('payment');
 })->middleware(['auth', 'verified'])->name('payment');
 
-Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-Route::get('/order', [OrderController::class, 'show'])->name('order.show');
-Route::get('/payment', [PaymentController::class, 'processPayment'])->name('payment');
-Route::post('/payment-store', [PaymentController::class, 'store'])->name('payment.store');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/payment', [PaymentController::class, 'processPayment'])->name('payment');
+    Route::post('/payment-store', [PaymentController::class, 'store'])->name('payment.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/transaction-history', [HistoryController::class, 'show'])->name('history.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

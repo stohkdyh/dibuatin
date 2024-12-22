@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <h4 class="text-gray-900 font-semibold">
-                    Invoice</h4>
+                    Transaction History</h4>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                 <h2 class="font-bold w-full text-2xl mb-8 align-middle">Detail Project</h2>
                 <div class="flex flex-row py-1">
                     <h2 class="text-gray-800 flex items-center">Request:</h2>
-                    <h2 class="w-full ms-20 text-justify text-lg font-medium">{{ $order->request }}</h2>
+                    <h2 class="w-full ms-20 text-right text-lg font-medium">{{ $order->request }}</h2>
                 </div>
                 <div class="flex flex-row py-1">
                     <h2 class="w-full text-gray-800">Orientation:</h2>

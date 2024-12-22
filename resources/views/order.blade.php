@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <h4 class="text-gray-900 font-semibold">
-                    Invoice</h4>
+                    Transaction History</h4>
             </div>
         </div>
     </div>
