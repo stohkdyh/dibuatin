@@ -11,11 +11,11 @@ class HistoryController extends Controller
 {
     public function show(Request $request)
     {
-        // $user = Auth::user()->id;
-        // $orders = Order::where('user_id', $user)->get();
+        $user = Auth::user()->id;
+        $orders = Order::where('user_id', $user)->get();
         // $projects = Project::all();
         
-        // return view('history', compact('projects', 'orders'));
-        return view('history');
+        return view('history', compact('orders'));
+        // return view('history');
     }
 }

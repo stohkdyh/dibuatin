@@ -99,7 +99,7 @@
                 onSuccess: function(result) {
                     storeData(result.order_id, result.payment_type, result.transaction_id, result
                         .transaction_status);
-                    let dashboardUrl = "{{ route('dashboard') }}";
+                    let dashboardUrl = "{{ route('history.show') }}";
                     window.location.href = dashboardUrl;
                 },
                 onPending: function(result) {
